@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <style>
+      .internship-label {
+          text-align: center; /* Center the text horizontally */
+          font-weight: bold; /* Make the text bold */
+          text-decoration: underline; /* Underline the text */
+          padding: 10px 0; /* Add some vertical padding */
+          width: 100%; /* Make sure the div spans the full width */
+      }
+  </style>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Computer Games Internship Player | Computer Games Internship</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/SMB's Clone2.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 960px; height: 560px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        <div class="title">Click here for full screen</div>
+      </div>
+      <div class="internship-label">COMPUTER GAMES INTERNSHIP</div>
+    </div>
+  </body>
+</html>
