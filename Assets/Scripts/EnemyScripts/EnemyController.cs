@@ -111,16 +111,6 @@ namespace EnemyScripts
         }
 
         /// <summary>
-        /// Coroutine to destroy the enemy after a delay.
-        /// </summary>
-        /// <returns>IEnumerator for coroutine.</returns>
-        IEnumerator Destroy()
-        {
-            yield return new WaitForSeconds(0.3f);
-            Destroy(gameObject);
-        }
-
-        /// <summary>
         /// Handles collision behavior specific to KoopaShell.
         /// </summary>
         /// <param name="other">The collision data.</param>
