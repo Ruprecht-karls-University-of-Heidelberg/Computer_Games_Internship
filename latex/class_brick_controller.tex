@@ -1,0 +1,260 @@
+\doxysection{Brick\+Controller Class Reference}
+\hypertarget{class_brick_controller}{}\label{class_brick_controller}\index{BrickController@{BrickController}}
+
+
+Controls the behavior and interactions of brick objects in the game.  
+
+
+Inheritance diagram for Brick\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_brick_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_brick_controller_ab84537c2303437f7ac61db246355d22f}{is\+Touch\+By\+Player}}
+\item 
+bool \mbox{\hyperlink{class_brick_controller_a97d05261af7965399474350df159bce8}{is\+Special\+Brick}}
+\item 
+int \mbox{\hyperlink{class_brick_controller_a1f19c32e3be16145a7e58ccfdae603cc}{special\+Brick\+Health}}
+\item 
+Box\+Collider2D \mbox{\hyperlink{class_brick_controller_a27076461dcec3edf8df8a019b300c4d6}{disable\+Collider}}
+\item 
+Game\+Object \mbox{\hyperlink{class_brick_controller_a51fcb0b6addc140849e8231210aca572}{break\+Brick\+Pieces}}
+\item 
+Game\+Object \mbox{\hyperlink{class_brick_controller_a2bb1608b12e9198fc83306e2de0de7e2}{animation\+Sprite}}
+\item 
+Audio\+Clip \mbox{\hyperlink{class_brick_controller_ab42088f4e5d7063f48ecdbf3fabf3d8c}{bump\+Sound}}
+\item 
+Audio\+Clip \mbox{\hyperlink{class_brick_controller_a61afef17ecf8a531313cccfde8950ebb}{break\+Sound}}
+\item 
+Audio\+Clip \mbox{\hyperlink{class_brick_controller_a38d53b0d662268402ad6fb0d28b9dba5}{coin\+Sound}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_brick_controller_a7fb7ca52cd242f0a7deac00f80839a50}{Awake}} ()
+\begin{DoxyCompactList}\small\item\em Awake is called when the script instance is being loaded. Initializes audio and animator components. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_brick_controller_a4e6b1a4852419ddb84b8e20cccc3c265}{Update}} ()
+\begin{DoxyCompactList}\small\item\em Update is called once per frame to handle the special brick animation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_brick_controller_a9ab7a11fc3b65f109e05bbc4c6cec7e1}{On\+Collision\+Enter2D}} (Collision2D other)
+\begin{DoxyCompactList}\small\item\em Called when another collider makes contact with the brick\textquotesingle{}s collider. Handles different interactions based on the type of brick and the collider. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_brick_controller_a30976311fc4bc0aa8b251bc44c89f975}{Handle\+Regular\+Brick\+Collision}} (bool is\+Player, bool is\+Big\+Player)
+\begin{DoxyCompactList}\small\item\em Handles collision for regular bricks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_brick_controller_a8bed3c2a689cf00ac3277c0a2b4f73be}{Handle\+Special\+Brick\+Collision}} ()
+\begin{DoxyCompactList}\small\item\em Handles collisions for special bricks, including coin collection and health decrement. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_brick_controller_a558a84226cac8824c1f29bc30a0e478e}{On\+Collision\+Exit2D}} (Collision2D other)
+\begin{DoxyCompactList}\small\item\em Called when another collider stops making contact with the brick\textquotesingle{}s collider. Resets the \textquotesingle{}is\+Touch\+By\+Player\textquotesingle{} state. \end{DoxyCompactList}\item 
+IEnumerator \mbox{\hyperlink{class_brick_controller_a111e65e8dc307c3d56fa08e3b57e268b}{Destroy}} ()
+\begin{DoxyCompactList}\small\item\em Coroutine to destroy the brick object after a short delay. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Animator \mbox{\hyperlink{class_brick_controller_ac3dd003cdfd2dacf1e7694f46aa9eae8}{\+\_\+brick\+Anim}}
+\item 
+Audio\+Source \mbox{\hyperlink{class_brick_controller_acf140587a0f6d346913f55a89a296e4a}{\+\_\+brick\+Audio}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static readonly int \mbox{\hyperlink{class_brick_controller_acc00dd07338b7ed27c78d2281740c89b}{TouchB}} = Animator.\+String\+To\+Hash("{}Touch\+\_\+b"{})
+\item 
+static readonly int \mbox{\hyperlink{class_brick_controller_abf826d695efda4f8fc7814b1fd7fcced}{TouchT}} = Animator.\+String\+To\+Hash("{}Touch\+\_\+t"{})
+\item 
+static readonly int \mbox{\hyperlink{class_brick_controller_af33b4e5ab9b98f4f13164a9f170186ca}{SpecialB}} = Animator.\+String\+To\+Hash("{}Special\+\_\+b"{})
+\item 
+static readonly int \mbox{\hyperlink{class_brick_controller_aa87898e923f110650192e088884869ce}{Final\+HitB}} = Animator.\+String\+To\+Hash("{}Final\+Hit\+\_\+b"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controls the behavior and interactions of brick objects in the game. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_brick_controller_a7fb7ca52cd242f0a7deac00f80839a50}\label{class_brick_controller_a7fb7ca52cd242f0a7deac00f80839a50} 
+\index{BrickController@{BrickController}!Awake@{Awake}}
+\index{Awake@{Awake}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{Awake()}{Awake()}}
+{\footnotesize\ttfamily void Brick\+Controller.\+Awake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Awake is called when the script instance is being loaded. Initializes audio and animator components. 
+
+\Hypertarget{class_brick_controller_a111e65e8dc307c3d56fa08e3b57e268b}\label{class_brick_controller_a111e65e8dc307c3d56fa08e3b57e268b} 
+\index{BrickController@{BrickController}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}}
+{\footnotesize\ttfamily IEnumerator Brick\+Controller.\+Destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Coroutine to destroy the brick object after a short delay. 
+
+\Hypertarget{class_brick_controller_a30976311fc4bc0aa8b251bc44c89f975}\label{class_brick_controller_a30976311fc4bc0aa8b251bc44c89f975} 
+\index{BrickController@{BrickController}!HandleRegularBrickCollision@{HandleRegularBrickCollision}}
+\index{HandleRegularBrickCollision@{HandleRegularBrickCollision}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{HandleRegularBrickCollision()}{HandleRegularBrickCollision()}}
+{\footnotesize\ttfamily void Brick\+Controller.\+Handle\+Regular\+Brick\+Collision (\begin{DoxyParamCaption}\item[{bool}]{is\+Player,  }\item[{bool}]{is\+Big\+Player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Handles collision for regular bricks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+Player} & Indicates if a player character collided.\\
+\hline
+{\em is\+Big\+Player} & Indicates if a big player character collided.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_brick_controller_a8bed3c2a689cf00ac3277c0a2b4f73be}\label{class_brick_controller_a8bed3c2a689cf00ac3277c0a2b4f73be} 
+\index{BrickController@{BrickController}!HandleSpecialBrickCollision@{HandleSpecialBrickCollision}}
+\index{HandleSpecialBrickCollision@{HandleSpecialBrickCollision}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{HandleSpecialBrickCollision()}{HandleSpecialBrickCollision()}}
+{\footnotesize\ttfamily void Brick\+Controller.\+Handle\+Special\+Brick\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Handles collisions for special bricks, including coin collection and health decrement. 
+
+\Hypertarget{class_brick_controller_a9ab7a11fc3b65f109e05bbc4c6cec7e1}\label{class_brick_controller_a9ab7a11fc3b65f109e05bbc4c6cec7e1} 
+\index{BrickController@{BrickController}!OnCollisionEnter2D@{OnCollisionEnter2D}}
+\index{OnCollisionEnter2D@{OnCollisionEnter2D}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{OnCollisionEnter2D()}{OnCollisionEnter2D()}}
+{\footnotesize\ttfamily void Brick\+Controller.\+On\+Collision\+Enter2D (\begin{DoxyParamCaption}\item[{Collision2D}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when another collider makes contact with the brick\textquotesingle{}s collider. Handles different interactions based on the type of brick and the collider. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The collision data.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_brick_controller_a558a84226cac8824c1f29bc30a0e478e}\label{class_brick_controller_a558a84226cac8824c1f29bc30a0e478e} 
+\index{BrickController@{BrickController}!OnCollisionExit2D@{OnCollisionExit2D}}
+\index{OnCollisionExit2D@{OnCollisionExit2D}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{OnCollisionExit2D()}{OnCollisionExit2D()}}
+{\footnotesize\ttfamily void Brick\+Controller.\+On\+Collision\+Exit2D (\begin{DoxyParamCaption}\item[{Collision2D}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when another collider stops making contact with the brick\textquotesingle{}s collider. Resets the \textquotesingle{}is\+Touch\+By\+Player\textquotesingle{} state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The collision data.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_brick_controller_a4e6b1a4852419ddb84b8e20cccc3c265}\label{class_brick_controller_a4e6b1a4852419ddb84b8e20cccc3c265} 
+\index{BrickController@{BrickController}!Update@{Update}}
+\index{Update@{Update}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Brick\+Controller.\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Update is called once per frame to handle the special brick animation. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_brick_controller_ac3dd003cdfd2dacf1e7694f46aa9eae8}\label{class_brick_controller_ac3dd003cdfd2dacf1e7694f46aa9eae8} 
+\index{BrickController@{BrickController}!\_brickAnim@{\_brickAnim}}
+\index{\_brickAnim@{\_brickAnim}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{\_brickAnim}{\_brickAnim}}
+{\footnotesize\ttfamily Animator Brick\+Controller.\+\_\+brick\+Anim\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_brick_controller_acf140587a0f6d346913f55a89a296e4a}\label{class_brick_controller_acf140587a0f6d346913f55a89a296e4a} 
+\index{BrickController@{BrickController}!\_brickAudio@{\_brickAudio}}
+\index{\_brickAudio@{\_brickAudio}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{\_brickAudio}{\_brickAudio}}
+{\footnotesize\ttfamily Audio\+Source Brick\+Controller.\+\_\+brick\+Audio\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_brick_controller_a2bb1608b12e9198fc83306e2de0de7e2}\label{class_brick_controller_a2bb1608b12e9198fc83306e2de0de7e2} 
+\index{BrickController@{BrickController}!animationSprite@{animationSprite}}
+\index{animationSprite@{animationSprite}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{animationSprite}{animationSprite}}
+{\footnotesize\ttfamily Game\+Object Brick\+Controller.\+animation\+Sprite}
+
+\Hypertarget{class_brick_controller_a51fcb0b6addc140849e8231210aca572}\label{class_brick_controller_a51fcb0b6addc140849e8231210aca572} 
+\index{BrickController@{BrickController}!breakBrickPieces@{breakBrickPieces}}
+\index{breakBrickPieces@{breakBrickPieces}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{breakBrickPieces}{breakBrickPieces}}
+{\footnotesize\ttfamily Game\+Object Brick\+Controller.\+break\+Brick\+Pieces}
+
+\Hypertarget{class_brick_controller_a61afef17ecf8a531313cccfde8950ebb}\label{class_brick_controller_a61afef17ecf8a531313cccfde8950ebb} 
+\index{BrickController@{BrickController}!breakSound@{breakSound}}
+\index{breakSound@{breakSound}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{breakSound}{breakSound}}
+{\footnotesize\ttfamily Audio\+Clip Brick\+Controller.\+break\+Sound}
+
+\Hypertarget{class_brick_controller_ab42088f4e5d7063f48ecdbf3fabf3d8c}\label{class_brick_controller_ab42088f4e5d7063f48ecdbf3fabf3d8c} 
+\index{BrickController@{BrickController}!bumpSound@{bumpSound}}
+\index{bumpSound@{bumpSound}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{bumpSound}{bumpSound}}
+{\footnotesize\ttfamily Audio\+Clip Brick\+Controller.\+bump\+Sound}
+
+\Hypertarget{class_brick_controller_a38d53b0d662268402ad6fb0d28b9dba5}\label{class_brick_controller_a38d53b0d662268402ad6fb0d28b9dba5} 
+\index{BrickController@{BrickController}!coinSound@{coinSound}}
+\index{coinSound@{coinSound}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{coinSound}{coinSound}}
+{\footnotesize\ttfamily Audio\+Clip Brick\+Controller.\+coin\+Sound}
+
+\Hypertarget{class_brick_controller_a27076461dcec3edf8df8a019b300c4d6}\label{class_brick_controller_a27076461dcec3edf8df8a019b300c4d6} 
+\index{BrickController@{BrickController}!disableCollider@{disableCollider}}
+\index{disableCollider@{disableCollider}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{disableCollider}{disableCollider}}
+{\footnotesize\ttfamily Box\+Collider2D Brick\+Controller.\+disable\+Collider}
+
+\Hypertarget{class_brick_controller_aa87898e923f110650192e088884869ce}\label{class_brick_controller_aa87898e923f110650192e088884869ce} 
+\index{BrickController@{BrickController}!FinalHitB@{FinalHitB}}
+\index{FinalHitB@{FinalHitB}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{FinalHitB}{FinalHitB}}
+{\footnotesize\ttfamily readonly int Brick\+Controller.\+Final\+HitB = Animator.\+String\+To\+Hash("{}Final\+Hit\+\_\+b"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{class_brick_controller_a97d05261af7965399474350df159bce8}\label{class_brick_controller_a97d05261af7965399474350df159bce8} 
+\index{BrickController@{BrickController}!isSpecialBrick@{isSpecialBrick}}
+\index{isSpecialBrick@{isSpecialBrick}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{isSpecialBrick}{isSpecialBrick}}
+{\footnotesize\ttfamily bool Brick\+Controller.\+is\+Special\+Brick}
+
+\Hypertarget{class_brick_controller_ab84537c2303437f7ac61db246355d22f}\label{class_brick_controller_ab84537c2303437f7ac61db246355d22f} 
+\index{BrickController@{BrickController}!isTouchByPlayer@{isTouchByPlayer}}
+\index{isTouchByPlayer@{isTouchByPlayer}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{isTouchByPlayer}{isTouchByPlayer}}
+{\footnotesize\ttfamily bool Brick\+Controller.\+is\+Touch\+By\+Player}
+
+\Hypertarget{class_brick_controller_af33b4e5ab9b98f4f13164a9f170186ca}\label{class_brick_controller_af33b4e5ab9b98f4f13164a9f170186ca} 
+\index{BrickController@{BrickController}!SpecialB@{SpecialB}}
+\index{SpecialB@{SpecialB}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{SpecialB}{SpecialB}}
+{\footnotesize\ttfamily readonly int Brick\+Controller.\+SpecialB = Animator.\+String\+To\+Hash("{}Special\+\_\+b"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{class_brick_controller_a1f19c32e3be16145a7e58ccfdae603cc}\label{class_brick_controller_a1f19c32e3be16145a7e58ccfdae603cc} 
+\index{BrickController@{BrickController}!specialBrickHealth@{specialBrickHealth}}
+\index{specialBrickHealth@{specialBrickHealth}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{specialBrickHealth}{specialBrickHealth}}
+{\footnotesize\ttfamily int Brick\+Controller.\+special\+Brick\+Health}
+
+\Hypertarget{class_brick_controller_acc00dd07338b7ed27c78d2281740c89b}\label{class_brick_controller_acc00dd07338b7ed27c78d2281740c89b} 
+\index{BrickController@{BrickController}!TouchB@{TouchB}}
+\index{TouchB@{TouchB}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{TouchB}{TouchB}}
+{\footnotesize\ttfamily readonly int Brick\+Controller.\+TouchB = Animator.\+String\+To\+Hash("{}Touch\+\_\+b"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{class_brick_controller_abf826d695efda4f8fc7814b1fd7fcced}\label{class_brick_controller_abf826d695efda4f8fc7814b1fd7fcced} 
+\index{BrickController@{BrickController}!TouchT@{TouchT}}
+\index{TouchT@{TouchT}!BrickController@{BrickController}}
+\doxysubsubsection{\texorpdfstring{TouchT}{TouchT}}
+{\footnotesize\ttfamily readonly int Brick\+Controller.\+TouchT = Animator.\+String\+To\+Hash("{}Touch\+\_\+t"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Scripts/\mbox{\hyperlink{_brick_controller_8cs}{Brick\+Controller.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,81 @@
+\doxysection{Castle\+Controller Class Reference}
+\hypertarget{class_castle_controller}{}\label{class_castle_controller}\index{CastleController@{CastleController}}
+
+
+Controls the behavior and animations of the castle in the game.  
+
+
+Inheritance diagram for Castle\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_castle_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_castle_controller_adeffff3233566fc6c4be9456bf9ee7fb}{Awake}} ()
+\begin{DoxyCompactList}\small\item\em Awake is called when the script instance is being loaded. Initializes the castle\textquotesingle{}s Animator component. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_castle_controller_af3d8a853d29af47c7997cacc78361b01}{On\+Collision\+Enter2D}} (Collision2D other)
+\begin{DoxyCompactList}\small\item\em Called when another collider makes contact with the castle\textquotesingle{}s collider. Triggers the castle\textquotesingle{}s finish animation on player contact. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Animator \mbox{\hyperlink{class_castle_controller_a6edfe915e0917e70e0b7ba53fc6e3655}{\+\_\+castle\+Anim}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static readonly int \mbox{\hyperlink{class_castle_controller_a97f6a1b305fb9707c2397b312b102b72}{FinishB}} = Animator.\+String\+To\+Hash("{}Finish\+\_\+b"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controls the behavior and animations of the castle in the game. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_castle_controller_adeffff3233566fc6c4be9456bf9ee7fb}\label{class_castle_controller_adeffff3233566fc6c4be9456bf9ee7fb} 
+\index{CastleController@{CastleController}!Awake@{Awake}}
+\index{Awake@{Awake}!CastleController@{CastleController}}
+\doxysubsubsection{\texorpdfstring{Awake()}{Awake()}}
+{\footnotesize\ttfamily void Castle\+Controller.\+Awake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Awake is called when the script instance is being loaded. Initializes the castle\textquotesingle{}s Animator component. 
+
+\Hypertarget{class_castle_controller_af3d8a853d29af47c7997cacc78361b01}\label{class_castle_controller_af3d8a853d29af47c7997cacc78361b01} 
+\index{CastleController@{CastleController}!OnCollisionEnter2D@{OnCollisionEnter2D}}
+\index{OnCollisionEnter2D@{OnCollisionEnter2D}!CastleController@{CastleController}}
+\doxysubsubsection{\texorpdfstring{OnCollisionEnter2D()}{OnCollisionEnter2D()}}
+{\footnotesize\ttfamily void Castle\+Controller.\+On\+Collision\+Enter2D (\begin{DoxyParamCaption}\item[{Collision2D}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when another collider makes contact with the castle\textquotesingle{}s collider. Triggers the castle\textquotesingle{}s finish animation on player contact. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The collision data.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_castle_controller_a6edfe915e0917e70e0b7ba53fc6e3655}\label{class_castle_controller_a6edfe915e0917e70e0b7ba53fc6e3655} 
+\index{CastleController@{CastleController}!\_castleAnim@{\_castleAnim}}
+\index{\_castleAnim@{\_castleAnim}!CastleController@{CastleController}}
+\doxysubsubsection{\texorpdfstring{\_castleAnim}{\_castleAnim}}
+{\footnotesize\ttfamily Animator Castle\+Controller.\+\_\+castle\+Anim\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_castle_controller_a97f6a1b305fb9707c2397b312b102b72}\label{class_castle_controller_a97f6a1b305fb9707c2397b312b102b72} 
+\index{CastleController@{CastleController}!FinishB@{FinishB}}
+\index{FinishB@{FinishB}!CastleController@{CastleController}}
+\doxysubsubsection{\texorpdfstring{FinishB}{FinishB}}
+{\footnotesize\ttfamily readonly int Castle\+Controller.\+FinishB = Animator.\+String\+To\+Hash("{}Finish\+\_\+b"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Scripts/\mbox{\hyperlink{_castle_controller_8cs}{Castle\+Controller.\+cs}}\end{DoxyCompactItemize}
