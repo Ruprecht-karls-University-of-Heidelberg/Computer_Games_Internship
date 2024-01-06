@@ -3,27 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Controls the movement of a stairway object within the game, allowing for both vertical and horizontal movement.
-/// </summary>
 public class StairwayController : MonoBehaviour
 {
     public bool isVerticalStairway;  // Indicates if the stairway moves vertically or horizontally.
     public float moveSpeed;          // Speed at which the stairway moves.
 
-    /// <summary>
-    /// Update is called once per frame to handle stairway movement.
-    /// </summary>
+    // Update is called once per frame.
     void Update()
     {
-        // Check if the stairway should move vertically.
         if (isVerticalStairway)
         {
+            // Call the function to move the stairway vertically.
             MoveVertical();
         }
         else
         {
-            // Reverse the direction of horizontal movement at specific positions.
+            // Reverse the direction of the stairway's movement when it reaches specific positions.
             if (transform.position.x < 59)
             {
                 moveSpeed = -moveSpeed;
@@ -33,34 +28,28 @@ public class StairwayController : MonoBehaviour
                 moveSpeed = -moveSpeed;
             }
 
+            // Call the function to move the stairway horizontally.
             MoveHorizontal();
         }
     }
 
-    /// <summary>
-    /// Called when another collider makes contact with the stairway's collider.
-    /// </summary>
-    /// <param name="other">The collision data.</param>
+    // Called when another collider makes contact with the stairway's collider.
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // Reverse movement direction upon collision with a stone.
+        // If the stairway collides with a stone, reverse its movement direction.
         if (other.gameObject.CompareTag("Stone"))
         {
             moveSpeed = -moveSpeed;
         }
     }
 
-    /// <summary>
-    /// Moves the stairway vertically in the downward direction.
-    /// </summary>
+    // Function to move the stairway vertically in the downward direction.
     private void MoveVertical()
     {
         transform.Translate(Time.deltaTime * moveSpeed * Vector3.down);
     }
 
-    /// <summary>
-    /// Moves the stairway horizontally in the left direction.
-    /// </summary>
+    // Function to move the stairway horizontally in the left direction.
     private void MoveHorizontal()
     {
         transform.Translate(Time.deltaTime * moveSpeed * Vector3.left);

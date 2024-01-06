@@ -1,56 +1,41 @@
 ﻿using System.Collections;
+// using SystemScripts;
+using PlayerScripts;
 using UnityEngine;
+using AdditionalScripts;
 
 namespace EnemyScripts
 {
-    /// <summary>
-    /// Manages the behavior and interactions of an enemy entity.
-    /// </summary>
     public class EnemyBody : MonoBehaviour
     {
-        /// <summary>
-        /// Reference to the enemy's main controller.
-        /// </summary>
+        // Reference to the enemy's main controller.
         private EnemyController _enemyController;
 
-        /// <summary>
-        /// Reference to the main enemy GameObject this body component belongs to.
-        /// </summary>
+        // Reference to the main enemy GameObject this body component belongs to.
         public GameObject enemy;
 
-        /// <summary>
-        /// AudioSource to play enemy-related sounds.
-        /// </summary>
+        // AudioSource to play enemy-related sounds.
         private AudioSource _enemyAudio;
 
-        /// <summary>
-        /// Sound to play when the enemy hits the player.
-        /// </summary>
-        public AudioClip hitPlayerSound;
+        // Sounds to play on certain interactions.
+        public AudioClip hitPlayerSound;         // Sound when the enemy hits the player.
+        public AudioClip turnSmallPlayerSound;   // Sound when a big player turns small after enemy interaction.
 
-        /// <summary>
-        /// Sound to play when a big player turns small after enemy interaction.
-        /// </summary>
-        public AudioClip turnSmallPlayerSound;
-
-        /// <summary>
-        /// Initialization of the enemy body component.
-        /// </summary>
         private void Awake()
         {
+            // Initialize the audio source component.
             _enemyAudio = GetComponent<AudioSource>();
             
+            // Get the enemy controller if an enemy reference exists.
             if (enemy != null)
             {
                 _enemyController = enemy.GetComponent<EnemyController>();
             }
         }
 
-        /// <summary>
-        /// Update is called once per frame to manage enemy body state.
-        /// </summary>
         private void Update()
         {
+            // Adjust the collider if the enemy has been touched by the player.
             if (_enemyController != null && _enemyController.isTouchByPlayer)
             {
                 GetComponent<BoxCollider2D>().offset = Vector2.zero;
@@ -58,46 +43,47 @@ namespace EnemyScripts
             }
         }
 
-        /// <summary>
-        /// Handles collisions with other game objects.
-        /// </summary>
-        /// <param name="other">The collision data.</param>
-        private void OnCollisionEnter2D(Collision2D other)
+        public void OnCollisionEnter2D(Collision2D other)
         {
+            // Get PlayerController from the colliding object (if exists).
             PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
             
             if (other.gameObject.CompareTag("Player"))
             {
+                // If the player is not invulnerable, the enemy hits the player.
                 if (!playerController.isInvulnerable)
                 {
                     _enemyAudio.PlayOneShot(hitPlayerSound);
-                    GameStatusController.IsDead = true;
-                    GameStatusController.Live -= 1;
+                    ToolController.IsDead = true;
+                    ToolController.Live -= 1;
+                    // Freeze the player by making it kinematic and setting velocity to zero.
                     playerController.GetComponent<Rigidbody2D>().isKinematic = true;
                     playerController.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 }
                 else
                 {
-                    Physics2D.IgnoreCollision(GetComponent<Collider2D>(), playerController.smallPlayerCollider.GetComponent<Collider2D>());
+                    // If player is invulnerable, ignore collisions between this enemy and the player.
+                    Physics2D.IgnoreCollision(GetComponent<Collider2D>(),
+                        playerController.smallPlayerCollider.GetComponent<Collider2D>());
                 }
             }
             else if (other.gameObject.CompareTag("BigPlayer"))
             {
+                // If a big player collides with the enemy, the player turns small.
                 _enemyAudio.PlayOneShot(turnSmallPlayerSound);
-                GameStatusController.IsBigPlayer = false;
-                GameStatusController.IsFirePlayer = false;
-                GameStatusController.PlayerTag = "Player";
-                playerController.gameObject.tag = GameStatusController.PlayerTag;
+                ToolController.IsBigPlayer = false;
+                ToolController.IsFirePlayer = false;
+                ToolController.PlayerTag = "Player";
+                playerController.gameObject.tag = ToolController.PlayerTag;
+                // Change the player's animation to reflect its smaller size.
                 playerController.ChangeAnim();
                 playerController.isInvulnerable = true;
+                // The die method can be used for future implementation.
+                // StartCoroutine(Die(other.gameObject));
             }
         }
 
-        /// <summary>
-        /// Coroutine to apply a force to the player (for future implementation).
-        /// </summary>
-        /// <param name="playerGameObject">The player game object.</param>
-        /// <returns>IEnumerator for coroutine.</returns>
+        // Coroutine to apply a force to the player (possibly to simulate a knock-back effect).
         IEnumerator Die(GameObject playerGameObject)
         {
             yield return new WaitForSeconds(1);

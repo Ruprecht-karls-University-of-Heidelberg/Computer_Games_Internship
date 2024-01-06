@@ -1,84 +1,70 @@
 ﻿using System.Collections;
-using SystemScripts;
+// using SystemScripts;
 using UnityEngine;
+using AdditionalScripts;
 
+// Namespace for player-related scripts.
 namespace PlayerScripts
 {
-    /// <summary>
-    /// Controls the behavior of the fireball in the game.
-    /// This script should be attached to the fireball GameObject.
-    /// </summary>
+    // Controls the behavior of the fireball in the game.
     public class FireBallController : MonoBehaviour
     {
-        /// <summary>
-        /// Defines the speed of the fireball.
-        /// </summary>
-        public float speed;
+        public float speed; // Defines the speed of the fireball.
 
-        /// <summary>
-        /// Rigidbody2D component of the fireball for physics interactions.
-        /// </summary>
-        private Rigidbody2D _fireBallRb;
+        // Private references to components.
+        private Rigidbody2D _fireBallRb; // Rigidbody2D component of the fireball for physics interactions.
+        private Animator _fireBallAnim; // Animator component of the fireball for animations.
+        private static readonly int DestroyT = Animator.StringToHash("Destroy_t"); // Converts the string "Destroy_t" to a hash for better performance with the animator.
 
-        /// <summary>
-        /// Animator component of the fireball for animations.
-        /// </summary>
-        private Animator _fireBallAnim;
-
-        /// <summary>
-        /// Converts the string "Destroy_t" to a hash for better performance with the animator.
-        /// </summary>
-        private static readonly int DestroyT = Animator.StringToHash("Destroy_t");
-
-        /// <summary>
-        /// Start is called before the first frame update.
-        /// Initializes the animator and rigidbody components and sets the initial velocity of the fireball.
-        /// </summary>
+        // Start is called before the first frame update.
         void Start()
         {
+            // Initialize the animator and rigidbody components.
             _fireBallAnim = GetComponent<Animator>();
             _fireBallRb = GetComponent<Rigidbody2D>();
+
+            // Set the initial velocity of the fireball based on its direction and speed.
             _fireBallRb.velocity = transform.right * speed;
         }
 
-        /// <summary>
-        /// Called when the fireball collides with another object.
-        /// Handles the interaction of the fireball with different objects in the game.
-        /// </summary>
-        /// <param name="other">The collision data.</param>
+        // This method is called when the fireball collides with another object.
         private void OnCollisionEnter2D(Collision2D other)
         {
+            // If the fireball hits the ground or stone...
             if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Stone"))
             {
+                // ...apply an upward force to the fireball.
                 _fireBallRb.AddForce(new Vector2(0, 180));
 
+                // If the fireball's horizontal velocity is near zero...
                 if (Mathf.RoundToInt(_fireBallRb.velocity.x) == 0)
                 {
+                    // ...trigger the "Destroy_t" animation and initiate the destroy coroutine.
                     _fireBallAnim.SetTrigger(DestroyT);
                     StartCoroutine(Destroy());
                 }
             }
-            else
+            else // If the fireball collides with something other than ground or stone...
             {
+                // ...trigger the "Destroy_t" animation and initiate the destroy coroutine.
                 _fireBallAnim.SetTrigger(DestroyT);
                 StartCoroutine(Destroy());
             }
 
+            // If the fireball hits a Piranha...
             if (other.gameObject.CompareTag("Piranha"))
             {
-                GameStatusController.IsEnemyDieOrCoinEat = true;
+                // ...set the enemy death or coin eaten status to true and destroy the Piranha.
+                ToolController.IsEnemyDieOrCoinEat = true;
                 Destroy(other.gameObject);
             }
         }
 
-        /// <summary>
-        /// Coroutine to destroy the fireball after a short delay.
-        /// </summary>
-        /// <returns>IEnumerator for coroutine execution.</returns>
+        // Coroutine to destroy the fireball after a short delay.
         private IEnumerator Destroy()
         {
-            yield return new WaitForSeconds(0.02f);
-            Destroy(gameObject);
+            yield return new WaitForSeconds(0.02f); // Wait for 0.02 seconds.
+            Destroy(gameObject); // Destroy the fireball.
         }
     }
 }

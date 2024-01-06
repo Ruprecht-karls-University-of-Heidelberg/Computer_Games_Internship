@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemAssembly", "SystemAssembly.csproj", "{e37a1b46-61e0-4edc-2523-69258dc9f211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllAssembly", "AllAssembly.csproj", "{391a1d92-6dba-10e8-cd1c-18ae06ce1a98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{ec7be954-1854-a422-5dac-0bd5fc6d4e50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnemyAssembly", "EnemyAssembly.csproj", "{3fee1217-cbce-fefb-ec40-ed60209730be}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdditionalAssembly", "AdditionalAssembly.csproj", "{81dd53d1-7df9-5c90-dd9c-b0fabe79d762}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerAssembly", "PlayerAssembly.csproj", "{65721976-e93e-79c6-cb33-8c89ec8194eb}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{e37a1b46-61e0-4edc-2523-69258dc9f211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e37a1b46-61e0-4edc-2523-69258dc9f211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{391a1d92-6dba-10e8-cd1c-18ae06ce1a98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{391a1d92-6dba-10e8-cd1c-18ae06ce1a98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ec7be954-1854-a422-5dac-0bd5fc6d4e50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ec7be954-1854-a422-5dac-0bd5fc6d4e50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3fee1217-cbce-fefb-ec40-ed60209730be}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3fee1217-cbce-fefb-ec40-ed60209730be}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81dd53d1-7df9-5c90-dd9c-b0fabe79d762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81dd53d1-7df9-5c90-dd9c-b0fabe79d762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65721976-e93e-79c6-cb33-8c89ec8194eb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65721976-e93e-79c6-cb33-8c89ec8194eb}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

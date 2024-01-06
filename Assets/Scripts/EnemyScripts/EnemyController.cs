@@ -1,158 +1,116 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+// using SystemScripts;
 using UnityEngine;
+using AdditionalScripts;
 
 namespace EnemyScripts
 {
-    /// <summary>
-    /// Controls the behavior and interactions of an enemy character.
-    /// </summary>
     public class EnemyController : MonoBehaviour
     {
-        /// <summary>
-        /// Movement speed of the enemy.
-        /// </summary>
+        // Enemy movement speed.
         public int speed = 2;
 
-        /// <summary>
-        /// Force to apply when the enemy pushes an object.
-        /// </summary>
+        // Force to apply when the enemy pushes an object.
         public float pushForce = 500;
 
-        /// <summary>
-        /// Indicates if the enemy has been touched by the player.
-        /// </summary>
+        // Indicates if the enemy has been touched by the player.
         public bool isTouchByPlayer;
 
-        /// <summary>
-        /// Reference to the enemy's animator.
-        /// </summary>
+        // Reference to the enemy's animator.
         private Animator _enemyAnim;
 
-        /// <summary>
-        /// List of colliders to disable when the enemy dies.
-        /// </summary>
+        // List of colliders to disable when the enemy dies.
         public List<Collider2D> deadDisableCollider;
 
-        /// <summary>
-        /// Single collider to enable when the enemy dies.
-        /// </summary>
+        // Single collider to enable when the enemy dies.
         public Collider2D deadEnableCollider;
 
-        /// <summary>
-        /// Animator's parameter hash to optimize performance.
-        /// </summary>
+        // Animator's parameter hash to optimize performance.
         private static readonly int DieB = Animator.StringToHash("Die_b");
 
-        /// <summary>
-        /// Initialization of the enemy controller component.
-        /// </summary>
         private void Awake()
         {
+            // Initialize the animator component.
             _enemyAnim = GetComponent<Animator>();
         }
 
-        /// <summary>
-        /// Update is called once per frame to manage enemy movement.
-        /// </summary>
         private void Update()
         {
             Move();
         }
 
-        /// <summary>
-        /// Moves the enemy.
-        /// </summary>
+        // Moves the enemy.
         private void Move()
         {
             transform.Translate(speed * Time.deltaTime * Vector3.left);
         }
 
-        /// <summary>
-        /// Handles the death of the enemy.
-        /// </summary>
+        // Handles the death of the enemy.
         public void Die()
         {
             isTouchByPlayer = true;
-            GameStatusController.Score += 200;
+            ToolController.Score += 200;
 
-            foreach (var collider in deadDisableCollider)
+            // Disable all colliders in the deadDisableCollider list.
+            for (var i = 0; i < deadDisableCollider.Count; i++)
             {
-                collider.enabled = false;
+                deadDisableCollider[i].enabled = false;
             }
 
+            // Enable the collider if it's assigned.
             if (deadEnableCollider != null)
             {
                 deadEnableCollider.enabled = true;
             }
 
+            // Change animation to the "death" animation.
             _enemyAnim.SetBool(DieB, true);
-
+            
+            // If the enemy is a Goomba, start the destroy coroutine.
             if (CompareTag("Goomba"))
             {
                 StartCoroutine(Destroy());
             }
         }
 
-        /// <summary>
-        /// Handles collisions with other objects.
-        /// </summary>
-        /// <param name="other">The collision data.</param>
+        // Handles collisions with other objects.
         private void OnCollisionEnter2D(Collision2D other)
         {
+            // Checks and handles collisions for KoopaShell.
             if (CompareTag("KoopaShell"))
             {
-                HandleKoopaShellCollision(other);
+                // Reverse direction for specific collision cases.
+                if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Ground") &&
+                    !other.gameObject.CompareTag("Brick") && !other.gameObject.CompareTag("ScreenBorder") &&
+                    !other.gameObject.CompareTag("Goomba") && !other.gameObject.CompareTag("Koopa"))
+                {
+                    transform.Rotate(0, 180, 0);
+                }
             }
             else
             {
-                HandleGeneralCollision(other);
-            }
-        }
-
-        /// <summary>
-        /// Handles collision behavior specific to KoopaShell.
-        /// </summary>
-        /// <param name="other">The collision data.</param>
-        private void HandleKoopaShellCollision(Collision2D other)
-        {
-            if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Ground") &&
-                !other.gameObject.CompareTag("Brick") && !other.gameObject.CompareTag("ScreenBorder") &&
-                !other.gameObject.CompareTag("Goomba") && !other.gameObject.CompareTag("Koopa"))
-            {
-                transform.Rotate(0, 180, 0);
-            }
-        }
-
-        /// <summary>
-        /// Handles general collision behavior for enemies.
-        /// </summary>
-        /// <param name="other">The collision data.</param>
-        private void HandleGeneralCollision(Collision2D other)
-        {
-            if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Ground") &&
-                !other.gameObject.CompareTag("Brick") && !other.gameObject.CompareTag("ScreenBorder"))
-            {
-                transform.Rotate(0, 180, 0);
+                // Reverse direction for other collision cases.
+                if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Ground") &&
+                    !other.gameObject.CompareTag("Brick") && !other.gameObject.CompareTag("ScreenBorder"))
+                {
+                    transform.Rotate(0, 180, 0);
+                }
             }
 
+            // Handles the enemy's interaction with KoopaShell or Fireball.
             if (other.gameObject.CompareTag("KoopaShell") || other.gameObject.CompareTag("Fireball"))
             {
-                GameStatusController.Score += 200;
-                GameStatusController.IsEnemyDieOrCoinEat = true;
+                ToolController.Score += 200;
+                ToolController.IsEnemyDieOrCoinEat = true;
                 Destroy(gameObject);
             }
         }
-        /// <summary>
-        /// Coroutine to destroy the enemy after a short delay.
-        /// </summary>
-        /// <returns>IEnumerator for coroutine.</returns>
+
+        // Coroutine to destroy the enemy after a short delay.
         IEnumerator Destroy()
         {
-            // Wait for 0.3 seconds.
             yield return new WaitForSeconds(0.3f);
-
-            // Destroy the game object this script is attached to.
             Destroy(gameObject);
         }
     }

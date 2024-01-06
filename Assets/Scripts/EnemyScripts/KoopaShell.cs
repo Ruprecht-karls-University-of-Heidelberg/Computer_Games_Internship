@@ -1,83 +1,53 @@
-﻿using SystemScripts;
+﻿// using SystemScripts;
 using PlayerScripts;
 using UnityEngine;
+using AdditionalScripts;
 
 namespace EnemyScripts
 {
-    /// <summary>
-    /// Manages the behavior of the Koopa's shell when it's kicked by the player.
-    /// This script should be attached to the Koopa shell GameObject.
-    /// </summary>
+    // This script manages the behavior of the Koopa's shell when it's kicked by the player.
     public class KoopaShell : MonoBehaviour
     {
-        /// <summary>
-        /// Reference to the Koopa GameObject.
-        /// </summary>
+        // Reference to the Koopa GameObject.
         public GameObject koopa;
 
-        /// <summary>
-        /// Determines the movement direction of the Koopa shell.
-        /// </summary>
+        // Determine the movement direction of the Koopa shell.
         private bool _isMoveRight;
 
-        /// <summary>
-        /// Determines if the Koopa shell is currently moving.
-        /// </summary>
+        // Determine if the Koopa shell is currently moving.
         private bool _isMove;
 
-        /// <summary>
-        /// Flag to check if the player can be killed by the Koopa shell.
-        /// </summary>
+        // Flag to check if the player can be killed by the Koopa shell.
         private bool _isPlayerKillable;
 
-        /// <summary>
-        /// Movement speed of the Koopa shell.
-        /// </summary>
+        // Movement speed of the Koopa shell.
         public float speed;
 
-        /// <summary>
-        /// Audio source for playing sound effects.
-        /// </summary>
+        // Audio source for playing sound effects.
         private AudioSource _enemyAudio;
 
-        /// <summary>
-        /// Sound clip to play when the player hits the Koopa shell.
-        /// </summary>
+        // Sound clips.
         public AudioClip hitPlayerSound;
-
-        /// <summary>
-        /// Sound clip to play when the Koopa shell is kicked.
-        /// </summary>
         public AudioClip kickSound;
-
-        /// <summary>
-        /// Sound clip to play when a big player turns small after being hit by the Koopa shell.
-        /// </summary>
         public AudioClip turnSmallPlayerSound;
 
-        /// <summary>
-        /// Initializes the audio source component.
-        /// </summary>
         private void Awake()
         {
+            // Initialize the audio source component.
             _enemyAudio = GetComponent<AudioSource>();
         }
 
-        /// <summary>
-        /// Update is called once per frame to handle Koopa shell movement.
-        /// </summary>
-        private void Update()
+        // Update is called once per frame.
+        void Update()
         {
+            // If the Koopa shell is set to move, move it.
             if (_isMove)
             {
                 Move();
             }
         }
 
-        /// <summary>
-        /// Handles collisions with other objects.
-        /// </summary>
-        /// <param name="other">The collision data.</param>
+        // Handle collisions with other objects.
         private void OnCollisionEnter2D(Collision2D other)
         {
             // Play kick sound when colliding with objects other than the player.
@@ -101,8 +71,11 @@ namespace EnemyScripts
 
                     // Set movement and direction based on the collision angle.
                     _isMove = true;
-                    _isMoveRight = angle <= 0;
-                    if (other.gameObject.CompareTag("BigPlayer"))
+                    if (other.gameObject.CompareTag("Player"))
+                    {
+                        _isMoveRight = angle <= 0;
+                    }
+                    else if (other.gameObject.CompareTag("BigPlayer"))
                     {
                         _isMoveRight = angle > 0;
                     }
@@ -111,9 +84,9 @@ namespace EnemyScripts
                     _isPlayerKillable = true;
                 }
             }
+            // Logic for when the Koopa shell can kill the player.
             else
             {
-                // Logic for when the Koopa shell can kill the player.
                 PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
                 if (other.gameObject.CompareTag("Player"))
                 {
@@ -121,30 +94,29 @@ namespace EnemyScripts
                     if (!playerController.isInvulnerable)
                     {
                         _enemyAudio.PlayOneShot(hitPlayerSound);
-                        GameStatusController.IsDead = true;
+                        ToolController.IsDead = true;
                     }
                     else
                     {
                         // Ignore collisions with the player's small collider when invulnerable.
-                        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), playerController.smallPlayerCollider.GetComponent<Collider2D>());
+                        Physics2D.IgnoreCollision(GetComponent<Collider2D>(),
+                            playerController.smallPlayerCollider.GetComponent<Collider2D>());
                     }
                 }
                 else if (other.gameObject.CompareTag("BigPlayer"))
                 {
                     _enemyAudio.PlayOneShot(turnSmallPlayerSound);
-                    GameStatusController.IsBigPlayer = false;
-                    GameStatusController.IsFirePlayer = false;
-                    GameStatusController.PlayerTag = "Player";
-                    playerController.gameObject.tag = GameStatusController.PlayerTag;
+                    ToolController.IsBigPlayer = false;
+                    ToolController.IsFirePlayer = false;
+                    ToolController.PlayerTag = "Player";
+                    playerController.gameObject.tag = ToolController.PlayerTag;
                     playerController.ChangeAnim();
                     playerController.isInvulnerable = true;
                 }
             }
         }
 
-        /// <summary>
-        /// Move the Koopa shell based on the set direction.
-        /// </summary>
+        // Move the Koopa shell based on the set direction.
         private void Move()
         {
             if (_isMoveRight)

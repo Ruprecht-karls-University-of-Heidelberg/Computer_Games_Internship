@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using AdditionalScripts;
 
 namespace SystemScripts
 {
@@ -49,7 +50,7 @@ namespace SystemScripts
                 {
                     // If there's no ongoing boss battle, position the camera behind the player.
                     // Else, fix the camera's position for the boss battle.
-                    transform.position = !GameStatusController.IsBossBattle
+                    transform.position = !ToolController.IsBossBattle
                         ? new Vector3(player.transform.position.x, 5, -10)
                         : new Vector3(285, 5, -10);
                 }
