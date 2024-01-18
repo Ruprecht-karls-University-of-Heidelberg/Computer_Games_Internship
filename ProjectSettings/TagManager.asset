@@ -3,7 +3,37 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - EnemyHead
+  - EnemyBody
+  - Enemy
+  - Pipe
+  - Brick
+  - Stone
+  - ScreenBorder
+  - BigMushroom
+  - 1UpMushroom
+  - Mushroom
+  - PowerBrick
+  - BigPlayer
+  - FireFlower
+  - UltimateStar
+  - Pole
+  - Stand
+  - Castle
+  - DeathAbyss
+  - Koopa
+  - Goomba
+  - Coin
+  - SpecialPipe
+  - UltimatePlayer
+  - UltimateBigPlayer
+  - KoopaShell
+  - Axe
+  - Princess
+  - Piranha
+  - Fireball
   layers:
   - Default
   - TransparentFX
@@ -13,9 +43,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - PowerUps
   - 
   - 
   - 

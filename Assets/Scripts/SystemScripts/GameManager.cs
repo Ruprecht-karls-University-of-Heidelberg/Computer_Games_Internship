@@ -5,8 +5,6 @@ using EnemyScripts;
 using PlayerScripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using AdditionalScripts;
-//after changing
 
 namespace SystemScripts
 {
@@ -24,154 +22,72 @@ namespace SystemScripts
         public float time = 400;
         public float finalTime;
 
-        // Initializes game elements upon object awakening.
         private void Awake()
-        {
-            InitializeStairwaySpawning();
-            InitializeGameTime();
-        }
-
-        // Prepares stairway spawning if the level requires it.
-        private void InitializeStairwaySpawning()
         {
             if (isStairLevel)
             {
                 InvokeRepeating(nameof(SpawnStairway), 0, 3);
             }
-        }
 
-        // Sets the initial game time in the status controller.
-        private void InitializeGameTime()
-        {
             if (gameStatusController != null)
             {
                 gameStatusController.SetTime(time);
             }
         }
 
-        // Regularly updates game elements each frame.
         private void Update()
         {
             if (player != null)
             {
-                PerformPlayerRelatedUpdates();
+                StopEnemiesFromMovingWhenPlayerDie();
+                SetActiveEnemiesWhenSeePlayer();
+                DestroyEnemiesOutOfBound();
+                UpdateTime();
+                UltimateDestroyAll();
+
+                if (player.isStopTime)
+                {
+                    finalTime = time;
+                    player.isStopTime = false;
+                }
             }
         }
 
-        // Conducts updates related to player actions and states.
-        private void PerformPlayerRelatedUpdates()
-        {
-            HaltEnemiesOnPlayerDeath();
-            ActivateEnemiesUponPlayerDetection();
-            EliminateOutOfBoundsEnemies();
-            CountDownTime();
-            ExecuteUltimateDestruction();
-
-            CaptureFinalTimeOnTimeStop();
-        }
-
-        // Stops enemies from moving if the player has died.
-        private void HaltEnemiesOnPlayerDeath()
-        {
-            StopEnemiesFromMovingWhenPlayerDie();
-        }
-
-        // Activates enemies when they detect the player.
-        private void ActivateEnemiesUponPlayerDetection()
-        {
-            SetActiveEnemiesWhenSeePlayer();
-        }
-
-        // Removes enemies that have moved out of bounds.
-        private void EliminateOutOfBoundsEnemies()
-        {
-            DestroyEnemiesOutOfBound();
-        }
-
-        // Updates the remaining game time.
-        private void CountDownTime()
-        {
-            UpdateTime();
-        }
-
-        // Executes a complete destruction under certain conditions.
-        private void ExecuteUltimateDestruction()
-        {
-            UltimateDestroyAll();
-        }
-
-        // Records the final time when time-stop is activated by the player.
-        private void CaptureFinalTimeOnTimeStop()
-        {
-            if (player.isStopTime)
-            {
-                finalTime = time;
-                player.isStopTime = false;
-            }
-        }
-
-
-        // Halts the movement of all enemies if the player has been defeated.
         private void StopEnemiesFromMovingWhenPlayerDie()
         {
-            // Exit if the player is not dead.
-            if (!ToolController.IsDead) return;
-
-            // Iterate over the list of enemy controllers.
-            for (int i = enemyControllers.Count - 1; i >= 0; i--)
+            if (!GameStatusController.IsDead) return;
+            for (var i = 0; i < enemyControllers.Count; i++)
             {
                 if (enemyControllers[i] != null)
                 {
-                    // Halt individual enemy movement.
-                    FreezeEnemy(enemyControllers[i]);
+                    enemyControllers[i].speed = 0;
+                    enemyControllers[i].gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    enemyControllers[i].gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
                 }
                 else
                 {
-                    // Remove null references from the list.
-                    enemyControllers.RemoveAt(i);
+                    enemyControllers.Remove(enemyControllers[i]);
                 }
             }
         }
 
-        // Freezes the enemy's movement and sets it as kinematic.
-        private void FreezeEnemy(EnemyController enemyController)
-        {
-            enemyController.speed = 0;
-            Rigidbody2D enemyRigidbody = enemyController.gameObject.GetComponent<Rigidbody2D>();
-            enemyRigidbody.velocity = Vector2.zero;
-            enemyRigidbody.isKinematic = true;
-        }
-
-
-// Activates enemies within a certain distance of the player.
         private void SetActiveEnemiesWhenSeePlayer()
         {
-            // Reverse iteration to safely modify the list during iteration.
-            for (int i = enemyGameObjects.Count - 1; i >= 0; i--)
+            for (var i = 0; i < enemyGameObjects.Count; i++)
             {
                 if (enemyGameObjects[i] != null)
                 {
-                    ActivateEnemyIfCloseToPlayer(enemyGameObjects[i]);
+                    if (enemyGameObjects[i].transform.position.x - player.transform.position.x < 12)
+                    {
+                        enemyGameObjects[i].SetActive(true);
+                    }
                 }
                 else
                 {
-                    // Remove null entries from the list.
-                    enemyGameObjects.RemoveAt(i);
+                    enemyGameObjects.Remove(enemyGameObjects[i]);
                 }
             }
         }
-
-        // Activates an enemy game object if it is close to the player.
-        private void ActivateEnemyIfCloseToPlayer(GameObject enemyGameObject)
-        {
-            float distanceToPlayer = Mathf.Abs(enemyGameObject.transform.position.x - player.transform.position.x);
-            if (distanceToPlayer < 12)
-            {
-                enemyGameObject.SetActive(true);
-            }
-        }
-
-
 
         private void DestroyEnemiesOutOfBound()
         {
@@ -191,151 +107,79 @@ namespace SystemScripts
             }
         }
 
-        // Manages the countdown of game time and updates game state based on time.
         private void UpdateTime()
         {
-            if (ShouldDecrementTime())
+            if (!GameStatusController.IsDead && !player.isWalkingToCastle && !player.isInCastle &&
+                !GameStatusController.IsGameFinish)
             {
-                DecrementTime();
-                CheckTimeForDeath();
+                gameStatusController.SetTime(time -= Time.deltaTime * 2);
+                if (time < 0)
+                {
+                    time = 0;
+                    GameStatusController.IsDead = true;
+                }
             }
             else if (player.isInCastle)
             {
-                UpdateCastleTime();
-            }
-        }
+                gameStatusController.SetTime(time -= Time.deltaTime * 60);
 
-        // Determines if time should be decremented based on game conditions.
-        private bool ShouldDecrementTime()
-        {
-            return !ToolController.IsDead && !player.isWalkingToCastle && !player.isInCastle && !ToolController.IsGameFinish;
-        }
-
-        // Decrements the game time.
-        private void DecrementTime()
-        {
-            gameStatusController.SetTime(time -= Time.deltaTime * 2);
-        }
-
-        // Checks if time has run out and sets the player as dead.
-        private void CheckTimeForDeath()
-        {
-            if (time < 0)
-            {
-                time = 0;
-                ToolController.IsDead = true;
-            }
-        }
-
-        // Manages time updates when the player is in the castle.
-        private void UpdateCastleTime()
-        {
-            DecrementCastleTime();
-            AwardScoreForTimeInCastle();
-        }
-
-        // Decrements time faster when the player is in the castle.
-        private void DecrementCastleTime()
-        {
-            gameStatusController.SetTime(time -= Time.deltaTime * 60);
-        }
-
-        // Awards score based on time spent in the castle and checks for level completion.
-        private void AwardScoreForTimeInCastle()
-        {
-            if (time < 0)
-            {
-                time = 0;
-                StartCoroutine(NextLevel());
-            }
-            else
-            {
-                AwardScorePerSecond();
-            }
-        }
-
-        // Awards score for each second spent in the castle.
-        private void AwardScorePerSecond()
-        {
-            if (finalTime - time >= 1f)
-            {
-                ToolController.Score += 50;
-                finalTime = time;
-            }
-        }
-
-
-        // Executes the ultimate destruction of enemies based on player's state.
-        private void UltimateDestroyAll()
-        {
-            if (IsPlayerInUltimateState())
-            {
-                ProcessEnemiesForUltimateDestruction();
-            }
-        }
-
-        // Determines if the player is in an ultimate state.
-        private bool IsPlayerInUltimateState()
-        {
-            return player.CompareTag("UltimatePlayer") || player.CompareTag("UltimateBigPlayer");
-        }
-
-        // Processes each enemy for potential destruction in the ultimate state.
-        private void ProcessEnemiesForUltimateDestruction()
-        {
-            for (int i = enemyControllers.Count - 1; i >= 0; i--)
-            {
-                if (enemyControllers[i] != null)
+                if (time < 0)
                 {
-                    EvaluateAndDestroyEnemy(i);
+                    time = 0;
+                    StartCoroutine(NextLevel());
                 }
                 else
                 {
-                    enemyControllers.RemoveAt(i);
+                    if (finalTime - time >= 1f)
+                    {
+                        GameStatusController.Score += 50;
+                        finalTime = time;
+                    }
                 }
             }
         }
 
-        // Evaluates and destroys the enemy if conditions are met.
-        private void EvaluateAndDestroyEnemy(int index)
+        private void UltimateDestroyAll()
         {
-            float distance = Mathf.RoundToInt(enemyControllers[index].gameObject.transform.position.x - player.transform.position.x);
-            if (distance == 0)
+            if (player.CompareTag("UltimatePlayer") || player.CompareTag("UltimateBigPlayer"))
             {
-                float delay = player.CompareTag("UltimatePlayer") ? 0.2f : (player.CompareTag("UltimateBigPlayer") ? 0.7f : 0f);
-                if (delay > 0)
+                for (var i = 0; i < enemyControllers.Count; i++)
                 {
-                    KillAndRemoveEnemies(index, delay);
+                    if (enemyControllers[i] != null)
+                    {
+                        if (Mathf.RoundToInt(enemyControllers[i].gameObject.transform.position.x -
+                                             player.transform.position.x) == 0 && player.CompareTag("UltimatePlayer"))
+                        {
+                            KillAndRemoveEnemies(i, 0.2f);
+                        }
+                        else if (Mathf.RoundToInt(enemyControllers[i].gameObject.transform.position.x -
+                                                  player.transform.position.x) == 0 &&
+                                 player.CompareTag("UltimateBigPlayer"))
+                        {
+                            KillAndRemoveEnemies(i, 0.7f);
+                        }
+                    }
+                    else
+                    {
+                        enemyControllers.Remove(enemyControllers[i]);
+                    }
                 }
             }
         }
 
-
-        // Eliminates and removes enemies based on proximity to the player.
         private void KillAndRemoveEnemies(int i, float distance)
         {
-            if (IsEnemyWithinVerticalDistance(i, distance))
+            if (enemyControllers[i].gameObject.transform.position.y - player.transform.position.y <
+                distance &&
+                enemyControllers[i].gameObject.transform.position.y - player.transform.position.y >
+                -distance)
             {
-                IncrementScoreAndTriggerEffects(i);
+                GameStatusController.Score += 200;
+                GameStatusController.IsEnemyDieOrCoinEat = true;
+                enemyControllers[i].Die();
+                enemyControllers.Remove(enemyControllers[i]);
             }
         }
-
-        // Checks if the enemy is within a specified vertical distance from the player.
-        private bool IsEnemyWithinVerticalDistance(int index, float distance)
-        {
-            float verticalDistance = enemyControllers[index].gameObject.transform.position.y - player.transform.position.y;
-            return verticalDistance < distance && verticalDistance > -distance;
-        }
-
-        // Increments score, triggers effects, and removes the enemy.
-        private void IncrementScoreAndTriggerEffects(int index)
-        {
-            ToolController.Score += 200;
-            ToolController.IsEnemyDieOrCoinEat = true;
-            enemyControllers[index].Die();
-            enemyControllers.RemoveAt(index);
-        }
-
 
         private void SpawnStairway()
         {

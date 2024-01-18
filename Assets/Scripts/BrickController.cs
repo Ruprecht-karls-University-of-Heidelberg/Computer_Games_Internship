@@ -2,7 +2,6 @@
 using System.Collections;
 using SystemScripts;
 using UnityEngine;
-using AdditionalScripts;
 
 public class BrickController : MonoBehaviour
 {
@@ -17,8 +16,6 @@ public class BrickController : MonoBehaviour
     public AudioClip bumpSound;
     public AudioClip breakSound;
     public AudioClip coinSound;
-
-    // Hash codes for the animation states
     private static readonly int TouchB = Animator.StringToHash("Touch_b");
     private static readonly int TouchT = Animator.StringToHash("Touch_t");
     private static readonly int SpecialB = Animator.StringToHash("Special_b");
@@ -26,16 +23,13 @@ public class BrickController : MonoBehaviour
 
     private void Awake()
     {
-        // Initializing the audio and animator components
         _brickAudio = GetComponent<AudioSource>();
         _brickAnim = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        // Set the special brick animation bool
         _brickAnim.SetBool(SpecialB, isSpecialBrick);
-
         if (specialBrickHealth == 0)
         {
             _brickAnim.SetBool(FinalHitB, true);
@@ -44,30 +38,21 @@ public class BrickController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        bool isPlayer = other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("UltimatePlayer");
-        bool isBigPlayer = other.gameObject.CompareTag("BigPlayer") || other.gameObject.CompareTag("UltimateBigPlayer");
-
-        if ((isPlayer || isBigPlayer) && !isSpecialBrick)
+        if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("UltimatePlayer")) && !isSpecialBrick)
         {
-            HandleRegularBrickCollision(isPlayer, isBigPlayer);
+            // Vector3 relative = transform.InverseTransformPoint(other.transform.position);
+            // float angle = Mathf.Atan2(relative.x, relative.y) * Mathf.Rad2Deg;
+            // Debug.Log(angle);
+            // if (angle > 153 || angle < -153)
+            // {
+                _brickAudio.PlayOneShot(bumpSound);
+                isTouchByPlayer = true;
+                _brickAnim.SetBool(TouchB, isTouchByPlayer);
+            // }
         }
 
-        // Handle special brick collision
-        if (isSpecialBrick && (isPlayer || isBigPlayer))
-        {
-            HandleSpecialBrickCollision();
-        }
-    }
-
-    private void HandleRegularBrickCollision(bool isPlayer, bool isBigPlayer)
-    {
-        if (isPlayer)
-        {
-            _brickAudio.PlayOneShot(bumpSound);
-            isTouchByPlayer = true;
-            _brickAnim.SetBool(TouchB, isTouchByPlayer);
-        }
-        else if (isBigPlayer)
+        else if ((other.gameObject.CompareTag("BigPlayer") || other.gameObject.CompareTag("UltimateBigPlayer")) &&
+                 !isSpecialBrick)
         {
             _brickAudio.PlayOneShot(breakSound);
             disableCollider.enabled = false;
@@ -77,25 +62,26 @@ public class BrickController : MonoBehaviour
             _brickAnim.SetTrigger(TouchT);
             StartCoroutine(Destroy());
         }
-    }
 
-    private void HandleSpecialBrickCollision()
-    {
-        if (specialBrickHealth > 0)
+        if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("UltimatePlayer") ||
+             other.gameObject.CompareTag("BigPlayer") || other.gameObject.CompareTag("UltimateBigPlayer")) &&
+            isSpecialBrick)
         {
-            _brickAudio.PlayOneShot(coinSound);
-            specialBrickHealth -= 1;
-            ToolController.CollectedCoin += 1;
-            ToolController.Score += 200;
-            ToolController.IsEnemyDieOrCoinEat = true;
-            isTouchByPlayer = true;
-            _brickAnim.SetBool(TouchB, isTouchByPlayer);
+            if (specialBrickHealth > 0)
+            {
+                _brickAudio.PlayOneShot(coinSound);
+                specialBrickHealth -= 1;
+                GameStatusController.CollectedCoin += 1;
+                GameStatusController.Score += 200;
+                GameStatusController.IsEnemyDieOrCoinEat = true;
+                isTouchByPlayer = true;
+                _brickAnim.SetBool(TouchB, isTouchByPlayer);
+            }
         }
     }
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        // Reset the touch by player state when the player is no longer in contact
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("UltimatePlayer") ||
             other.gameObject.CompareTag("BigPlayer") || other.gameObject.CompareTag("UltimateBigPlayer"))
         {
@@ -104,7 +90,6 @@ public class BrickController : MonoBehaviour
         }
     }
 
-    // Coroutine to destroy the brick object after a short delay
     IEnumerator Destroy()
     {
         yield return new WaitForSeconds(1);

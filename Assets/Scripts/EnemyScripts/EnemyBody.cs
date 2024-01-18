@@ -1,27 +1,25 @@
 ﻿using System.Collections;
-//using SystemScripts;
+using SystemScripts;
 using PlayerScripts;
 using UnityEngine;
-using AdditionalScripts;
 
 namespace EnemyScripts
 {
     public class EnemyBody : MonoBehaviour
     {
+        // private PlayerController _playerController;
         private EnemyController _enemyController;
+
         public GameObject enemy;
+
         private AudioSource _enemyAudio;
+
         public AudioClip hitPlayerSound;
         public AudioClip turnSmallPlayerSound;
-
-        private BoxCollider2D _boxCollider2D;
-        private Rigidbody2D _playerRigidbody2D;
 
         private void Awake()
         {
             _enemyAudio = GetComponent<AudioSource>();
-            _boxCollider2D = GetComponent<BoxCollider2D>();
-
             if (enemy != null)
             {
                 _enemyController = enemy.GetComponent<EnemyController>();
@@ -32,63 +30,41 @@ namespace EnemyScripts
         {
             if (_enemyController != null && _enemyController.isTouchByPlayer)
             {
-                _boxCollider2D.offset = Vector2.zero;
-                _boxCollider2D.size = new Vector2(1, 0.01f);
+                GetComponent<BoxCollider2D>().offset = Vector2.zero;
+                GetComponent<BoxCollider2D>().size = new Vector2(1, 0.01f);
             }
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
+            if (other.gameObject.CompareTag("Player"))
             {
-                HandlePlayerCollision(other.gameObject);
+                // StartCoroutine(Die(other.gameObject));
+                if (!playerController.isInvulnerable)
+                {
+                    _enemyAudio.PlayOneShot(hitPlayerSound);
+                    GameStatusController.IsDead = true;
+                    GameStatusController.Live -= 1;
+                    playerController.GetComponent<Rigidbody2D>().isKinematic = true;
+                    playerController.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                }
+                else
+                {
+                    Physics2D.IgnoreCollision(GetComponent<Collider2D>(),
+                        playerController.smallPlayerCollider.GetComponent<Collider2D>());
+                }
             }
-        }
-
-        private void HandlePlayerCollision(GameObject playerGameObject)
-        {
-            PlayerController playerController = playerGameObject.GetComponent<PlayerController>();
-
-            if (playerController == null) return;
-
-            _playerRigidbody2D = playerController.GetComponent<Rigidbody2D>();
-
-            if (!playerController.isInvulnerable)
-            {
-                HandleNonInvulnerablePlayer(playerController);
-            }
-            else
-            {
-                HandleInvulnerablePlayer(playerController);
-            }
-        }
-
-        private void HandleNonInvulnerablePlayer(PlayerController playerController)
-        {
-            _enemyAudio.PlayOneShot(hitPlayerSound);
-            ToolController.IsDead = true;
-            ToolController.Live -= 1;
-            _playerRigidbody2D.isKinematic = true;
-            _playerRigidbody2D.velocity = Vector2.zero;
-        }
-
-        private void HandleInvulnerablePlayer(PlayerController playerController)
-        {
-            if (ToolController.IsBigPlayer)
+            else if (other.gameObject.CompareTag("BigPlayer"))
             {
                 _enemyAudio.PlayOneShot(turnSmallPlayerSound);
-                ToolController.IsBigPlayer = false;
-                ToolController.IsFirePlayer = false;
-                ToolController.PlayerTag = "Player";
-                playerController.gameObject.tag = ToolController.PlayerTag;
+                GameStatusController.IsBigPlayer = false;
+                GameStatusController.IsFirePlayer = false;
+                GameStatusController.PlayerTag = "Player";
+                playerController.gameObject.tag = GameStatusController.PlayerTag;
                 playerController.ChangeAnim();
                 playerController.isInvulnerable = true;
-                // Uncomment the line below if you wish to use the Die coroutine
-                // StartCoroutine(Die(playerController.gameObject));
-            }
-            else
-            {
-                Physics2D.IgnoreCollision(_boxCollider2D, playerController.GetComponent<Collider2D>());
+                // StartCoroutine(Die(other.gameObject));
             }
         }
 
