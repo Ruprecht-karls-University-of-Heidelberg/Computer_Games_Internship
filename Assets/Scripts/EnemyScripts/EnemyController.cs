@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using SystemScripts;
+//using SystemScripts;
 using UnityEngine;
+using AdditionalScripts;
 
 namespace EnemyScripts
 {
@@ -10,16 +11,15 @@ namespace EnemyScripts
         public int speed = 2;
         public float pushForce = 500;
         public bool isTouchByPlayer;
-
-        private Animator _enemyAnim;
-        public List<Collider2D> deadDisableCollider;
+        public List<Collider2D> deadDisableColliders;
         public Collider2D deadEnableCollider;
 
-        private static readonly int DieB = Animator.StringToHash("Die_b");
+        private Animator _enemyAnimator;
+        private static readonly int DieHash = Animator.StringToHash("Die_b");
 
         private void Awake()
         {
-            _enemyAnim = GetComponent<Animator>();
+            _enemyAnimator = GetComponent<Animator>();
         }
 
         private void Update()
@@ -35,10 +35,10 @@ namespace EnemyScripts
         public void Die()
         {
             isTouchByPlayer = true;
-            GameStatusController.Score += 200;
-            for (var i = 0; i < deadDisableCollider.Count; i++)
+            ToolController.Score += 200;
+            foreach (var collider in deadDisableColliders)
             {
-                deadDisableCollider[i].enabled = false;
+                collider.enabled = false;
             }
 
             if (deadEnableCollider != null)
@@ -46,45 +46,58 @@ namespace EnemyScripts
                 deadEnableCollider.enabled = true;
             }
 
-            _enemyAnim.SetBool(DieB, true);
+            _enemyAnimator.SetBool(DieHash, true);
+
             if (CompareTag("Goomba"))
             {
-                StartCoroutine(Destroy());
+                StartCoroutine(DestroyEnemy());
             }
         }
+
 
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (CompareTag("KoopaShell"))
             {
-                if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Ground") &&
-                    !other.gameObject.CompareTag("Brick") && !other.gameObject.CompareTag("ScreenBorder") &&
-                    !other.gameObject.CompareTag("Goomba") && !other.gameObject.CompareTag("Koopa"))
-                {
-                    transform.Rotate(0, 180, 0);
-                }
+                ReverseDirectionForKoopaShell(other);
             }
             else
             {
-                if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Ground") &&
-                    !other.gameObject.CompareTag("Brick") && !other.gameObject.CompareTag("ScreenBorder"))
-                {
-                    transform.Rotate(0, 180, 0);
-                }
+                ReverseDirectionForOtherCollisions(other);
             }
 
             if (other.gameObject.CompareTag("KoopaShell") || other.gameObject.CompareTag("Fireball"))
             {
-                GameStatusController.Score += 200;
-                GameStatusController.IsEnemyDieOrCoinEat = true;
+                ToolController.Score += 200;
+                ToolController.IsEnemyDieOrCoinEat = true;
                 Destroy(gameObject);
             }
         }
 
-        IEnumerator Destroy()
+        private void ReverseDirectionForKoopaShell(Collision2D collision)
+        {
+            if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground") &&
+                !collision.gameObject.CompareTag("Brick") && !collision.gameObject.CompareTag("ScreenBorder") &&
+                !collision.gameObject.CompareTag("Goomba") && !collision.gameObject.CompareTag("Koopa"))
+            {
+                transform.Rotate(0, 180, 0);
+            }
+        }
+
+        private void ReverseDirectionForOtherCollisions(Collision2D collision)
+        {
+            if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground") &&
+                !collision.gameObject.CompareTag("Brick") && !collision.gameObject.CompareTag("ScreenBorder"))
+            {
+                transform.Rotate(0, 180, 0);
+            }
+        }
+
+        IEnumerator DestroyEnemy()
         {
             yield return new WaitForSeconds(0.3f);
             Destroy(gameObject);
         }
     }
 }
+
