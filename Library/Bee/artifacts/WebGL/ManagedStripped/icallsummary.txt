@@ -186,6 +186,7 @@ UnityEngine.GameObject::CompareTag
 UnityEngine.GameObject::get_activeInHierarchy
 UnityEngine.GameObject::get_activeSelf
 UnityEngine.GameObject::get_layer
+UnityEngine.GameObject::get_tag
 UnityEngine.GameObject::Internal_CreateGameObject
 UnityEngine.GameObject::SendMessage
 UnityEngine.GameObject::SetActive
@@ -312,6 +313,7 @@ UnityEngine.Internal.InputUnsafeUtility::GetAxis
 UnityEngine.Internal.InputUnsafeUtility::GetAxisRaw
 UnityEngine.Internal.InputUnsafeUtility::GetAxisRaw__Unmanaged
 UnityEngine.Internal.InputUnsafeUtility::GetAxis__Unmanaged
+UnityEngine.LayerMask::NameToLayer
 UnityEngine.Light::get_useColorTemperature
 UnityEngine.Light::get_bounceIntensity
 UnityEngine.Light::get_colorTemperature

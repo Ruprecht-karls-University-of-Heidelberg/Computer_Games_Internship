@@ -59,7 +59,7 @@ namespace SystemScripts
         }
 
         // Conducts updates related to player actions and states.
-        private void PerformPlayerRelatedUpdates()
+        public void PerformPlayerRelatedUpdates()
         {
             HaltEnemiesOnPlayerDeath();
             ActivateEnemiesUponPlayerDetection();
@@ -71,37 +71,37 @@ namespace SystemScripts
         }
 
         // Stops enemies from moving if the player has died.
-        private void HaltEnemiesOnPlayerDeath()
+        public void HaltEnemiesOnPlayerDeath()
         {
             StopEnemiesFromMovingWhenPlayerDie();
         }
 
         // Activates enemies when they detect the player.
-        private void ActivateEnemiesUponPlayerDetection()
+        public void ActivateEnemiesUponPlayerDetection()
         {
             SetActiveEnemiesWhenSeePlayer();
         }
 
         // Removes enemies that have moved out of bounds.
-        private void EliminateOutOfBoundsEnemies()
+        public void EliminateOutOfBoundsEnemies()
         {
             DestroyEnemiesOutOfBound();
         }
 
         // Updates the remaining game time.
-        private void CountDownTime()
+        public void CountDownTime()
         {
             UpdateTime();
         }
 
         // Executes a complete destruction under certain conditions.
-        private void ExecuteUltimateDestruction()
+        public void ExecuteUltimateDestruction()
         {
             UltimateDestroyAll();
         }
 
         // Records the final time when time-stop is activated by the player.
-        private void CaptureFinalTimeOnTimeStop()
+        public void CaptureFinalTimeOnTimeStop()
         {
             if (player.isStopTime)
             {

@@ -1,0 +1,16 @@
+{
+    "name": "PlayerScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:97c1cf6e2dbb14c1599a6b5caf7be9db"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

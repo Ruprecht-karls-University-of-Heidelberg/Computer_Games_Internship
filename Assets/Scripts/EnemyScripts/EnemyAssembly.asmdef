@@ -1,0 +1,17 @@
+{
+    "name": "EnemyAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:97c1cf6e2dbb14c1599a6b5caf7be9db",
+        "GUID:90dcfe03e626f442b92949c28f8cfb5b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

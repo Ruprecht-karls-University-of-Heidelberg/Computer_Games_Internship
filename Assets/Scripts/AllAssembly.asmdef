@@ -1,0 +1,17 @@
+{
+    "name": "AllAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:97c1cf6e2dbb14c1599a6b5caf7be9db",
+        "GUID:bf82ccd4b1cb14cd0bd60f3d3f6cdec7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

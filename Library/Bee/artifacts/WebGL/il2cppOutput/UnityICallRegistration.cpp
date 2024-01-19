@@ -890,6 +890,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_GameObject_get_layer();
 		Register_UnityEngine_GameObject_get_layer();
 
+		//System.String UnityEngine.GameObject::get_tag()
+		void Register_UnityEngine_GameObject_get_tag();
+		Register_UnityEngine_GameObject_get_tag();
+
 		//System.Void UnityEngine.GameObject::Internal_CreateGameObject(UnityEngine.GameObject,System.String)
 		void Register_UnityEngine_GameObject_Internal_CreateGameObject();
 		Register_UnityEngine_GameObject_Internal_CreateGameObject();
@@ -1443,6 +1447,14 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_Internal_InputUnsafeUtility_GetAxis__Unmanaged();
 
 	//End Registrations for type : UnityEngine.Internal.InputUnsafeUtility
+
+	//Start Registrations for type : UnityEngine.LayerMask
+
+		//System.Int32 UnityEngine.LayerMask::NameToLayer(System.String)
+		void Register_UnityEngine_LayerMask_NameToLayer();
+		Register_UnityEngine_LayerMask_NameToLayer();
+
+	//End Registrations for type : UnityEngine.LayerMask
 
 	//Start Registrations for type : UnityEngine.Light
 

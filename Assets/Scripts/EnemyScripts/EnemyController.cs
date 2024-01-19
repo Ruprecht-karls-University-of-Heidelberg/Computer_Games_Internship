@@ -17,17 +17,17 @@ namespace EnemyScripts
         private Animator _enemyAnimator;
         private static readonly int DieHash = Animator.StringToHash("Die_b");
 
-        private void Awake()
+        public void Awake()
         {
             _enemyAnimator = GetComponent<Animator>();
         }
 
-        private void Update()
+        public void Update()
         {
             Move();
         }
 
-        private void Move()
+        public void Move()
         {
             transform.Translate(speed * Time.deltaTime * Vector3.left);
         }
@@ -55,7 +55,7 @@ namespace EnemyScripts
         }
 
 
-        private void OnCollisionEnter2D(Collision2D other)
+        public void OnCollisionEnter2D(Collision2D other)
         {
             if (CompareTag("KoopaShell"))
             {
@@ -74,7 +74,7 @@ namespace EnemyScripts
             }
         }
 
-        private void ReverseDirectionForKoopaShell(Collision2D collision)
+        public void ReverseDirectionForKoopaShell(Collision2D collision)
         {
             if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground") &&
                 !collision.gameObject.CompareTag("Brick") && !collision.gameObject.CompareTag("ScreenBorder") &&
@@ -84,7 +84,7 @@ namespace EnemyScripts
             }
         }
 
-        private void ReverseDirectionForOtherCollisions(Collision2D collision)
+        public void ReverseDirectionForOtherCollisions(Collision2D collision)
         {
             if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground") &&
                 !collision.gameObject.CompareTag("Brick") && !collision.gameObject.CompareTag("ScreenBorder"))
@@ -93,7 +93,7 @@ namespace EnemyScripts
             }
         }
 
-        IEnumerator DestroyEnemy()
+        public IEnumerator DestroyEnemy()
         {
             yield return new WaitForSeconds(0.3f);
             Destroy(gameObject);
