@@ -87,7 +87,11 @@ namespace PlayerScripts
             {
                 tag = ToolController.PlayerTag;
             }
-
+            if (!ToolController.IsBigPlayer)
+            {
+                smallPlayer.SetActive(true);
+                bigPlayer.SetActive(false);
+            }
             // Get components and set initial states
             _playerAudio = GetComponent<AudioSource>();
             _velocity = Vector3.zero;
@@ -153,7 +157,7 @@ namespace PlayerScripts
         }
 
 
-          /// <summary>
+        /// <summary>
         /// Sets animation states for the player.
         /// </summary>
         /// <param name="state">The state to set for animation.</param>
@@ -229,7 +233,7 @@ namespace PlayerScripts
         }
 
 
-         /// <summary>
+        /// <summary>
         /// Manages the player's animation and physics while sliding down a pipe.
         /// </summary>
         private void HandlePipeSliding()
@@ -353,7 +357,7 @@ namespace PlayerScripts
             StartCoroutine(BeVulnerable());
         }
 
-               /// <summary>
+        /// <summary>
         /// Updates the player's animation states based on the current game state.
         /// </summary>
         private void UpdatePlayerState()
@@ -543,7 +547,7 @@ namespace PlayerScripts
         }
 
 
-             /// <summary>
+        /// <summary>
         /// Determines if a tag is related to ground elements.
         /// </summary>
         /// <param name="tag">The tag to check.</param>
@@ -718,7 +722,7 @@ namespace PlayerScripts
             }
         }
 
-              /// <summary>
+        /// <summary>
         /// Handles collision with the Princess, stopping the player's sliding speed and displaying a message.
         /// </summary>
         private void HandlePrincessCollision()
@@ -760,6 +764,9 @@ namespace PlayerScripts
         {
             _playerAnim.SetBool(DieB, isDead);  // Triggers the death animation
             ToolController.IsDead = true;  // Updates the death state in the ToolController
+                                           // Reset player state to small player
+            ToolController.IsBigPlayer = false;
+            ToolController.PlayerTag = "Player";
             StartCoroutine(DieAnim());  // Starts the death animation coroutine
             StartCoroutine(LoadingScene()); // Starts the loading scene coroutine
         }
