@@ -19,7 +19,7 @@ public class BrickController : MonoBehaviour
     public AudioClip coinSound;
 
     // Hash codes for the animation states
-    private static readonly int TouchB = Animator.StringToHash("Touch_b");
+    public static readonly int TouchB = Animator.StringToHash("Touch_b");
     private static readonly int TouchT = Animator.StringToHash("Touch_t");
     private static readonly int SpecialB = Animator.StringToHash("Special_b");
     private static readonly int FinalHitB = Animator.StringToHash("FinalHit_b");
@@ -59,7 +59,7 @@ public class BrickController : MonoBehaviour
         }
     }
 
-    private void HandleRegularBrickCollision(bool isPlayer, bool isBigPlayer)
+    public void HandleRegularBrickCollision(bool isPlayer, bool isBigPlayer)
     {
         if (isPlayer)
         {
