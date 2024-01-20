@@ -9,10 +9,6 @@ namespace EnemyScripts
     /// Controls the behavior of an enemy in the game.
     /// </summary>
     public class EnemyController : MonoBehaviour
-    /// <summary>
-    /// Controls the behavior of an enemy in the game.
-    /// </summary>
-    public class EnemyController : MonoBehaviour
     {
         /// <summary>
         /// The speed at which the enemy moves.

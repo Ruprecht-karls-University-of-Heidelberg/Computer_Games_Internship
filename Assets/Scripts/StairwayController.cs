@@ -2,14 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//after changing
 
+/// <summary>
+/// Controls the movement of a stairway object.
+/// </summary>
 public class StairwayController : MonoBehaviour
 {
-    public bool isVerticalStairway;  // Denotes if the stairway operates in a vertical or horizontal manner.
-    public float moveSpeed;          // Defines the velocity of the stairway's movement.
+    /// <summary>
+    /// Denotes if the stairway operates in a vertical or horizontal manner.
+    /// </summary>
+    public bool isVerticalStairway;
 
-    // Update is invoked every frame.
+    /// <summary>
+    /// Defines the velocity of the stairway's movement.
+    /// </summary>
+    public float moveSpeed;
+
+    /// <summary>
+    /// Update is invoked every frame.
+    /// </summary>
     void Update()
     {
         if (isVerticalStairway)
@@ -27,7 +38,10 @@ public class StairwayController : MonoBehaviour
         }
     }
 
-    // Triggered upon collision with another collider.
+    /// <summary>
+    /// Triggered upon collision with another collider.
+    /// </summary>
+    /// <param name="other">The collider that the stairway collided with.</param>
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Reverse the stairway's direction upon collision with a stone object.
@@ -37,19 +51,25 @@ public class StairwayController : MonoBehaviour
         }
     }
 
-    // Method for downward vertical movement of the stairway.
+    /// <summary>
+    /// Method for downward vertical movement of the stairway.
+    /// </summary>
     private void MoveStairwayVertically()
     {
         transform.Translate(Time.deltaTime * moveSpeed * Vector3.down);
     }
 
-    // Method for leftward horizontal movement of the stairway.
+    /// <summary>
+    /// Method for leftward horizontal movement of the stairway.
+    /// </summary>
     private void MoveStairwayHorizontally()
     {
         transform.Translate(Time.deltaTime * moveSpeed * Vector3.left);
     }
 
-    // Reverses the direction of movement when reaching specified horizontal positions.
+    /// <summary>
+    /// Reverses the direction of movement when reaching specified horizontal positions.
+    /// </summary>
     private void ReverseDirectionAtBoundaries()
     {
         if (transform.position.x < 59 || transform.position.x > 65)
@@ -58,7 +78,9 @@ public class StairwayController : MonoBehaviour
         }
     }
 
-    // Reverses the current direction of movement.
+    /// <summary>
+    /// Reverses the current direction of movement.
+    /// </summary>
     private void ReverseDirection()
     {
         moveSpeed = -moveSpeed;

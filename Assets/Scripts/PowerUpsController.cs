@@ -2,8 +2,10 @@
 using System.Collections;
 using UnityEngine;
 using AdditionalScripts;
-//after changing
 
+/// <summary>
+/// Controls the behavior of power-ups in the game.
+/// </summary>
 public class PowerUpsController : MonoBehaviour
 {
     public int speedRight;           
@@ -16,6 +18,9 @@ public class PowerUpsController : MonoBehaviour
     private AudioSource _powerAudio; 
     public AudioClip appearSound;    
 
+    /// <summary>
+    /// Initializes the power-up.
+    /// </summary>
     public void Awake()
     {
         InitializePowerUp();
@@ -31,6 +36,10 @@ public class PowerUpsController : MonoBehaviour
         HandleCollision(other.gameObject);
     }
 
+    /// <summary>
+    /// Handles the trigger enter event.
+    /// </summary>
+    /// <param name="other">The collider that triggered the event.</param>
     public void OnTriggerEnter2D(Collider2D other)
     {
         HandleTriggerEnter(other.gameObject);
@@ -43,7 +52,7 @@ public class PowerUpsController : MonoBehaviour
         _firstYPos = transform.position.y;
     }
 
-    public void HandlePowerUpMovement()
+    private void HandlePowerUpMovement()
     {
         if (isTouchByPlayer && !CompareTag("Coin"))
         {
@@ -117,7 +126,7 @@ public class PowerUpsController : MonoBehaviour
         _isEatable = true;
     }
 
-    void InteractionWithPlayer(GameObject other)
+    private void InteractionWithPlayer(GameObject other)
     {
         if (!CompareTag("Coin") && (other.CompareTag("Player") || other.CompareTag("UltimatePlayer") ||
                                     other.CompareTag("BigPlayer") || other.CompareTag("UltimateBigPlayer")))

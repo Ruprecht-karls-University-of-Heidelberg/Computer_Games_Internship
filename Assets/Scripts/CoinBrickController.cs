@@ -2,18 +2,44 @@
 using UnityEngine;
 using AdditionalScripts;
 
+/// <summary>
+/// Controls the behavior of a coin brick in the game.
+/// </summary>
 public class CoinBrickController : MonoBehaviour
 {
-    public bool isTouchByPlayer;  // Indicates if the brick has been touched by the player.
-    public bool isNotSpecialBrick; // Determines if the brick is a regular brick or a special one.
-    private Animator _coinBrickAnim;  // Animator component for controlling the brick's animations.
-    private AudioSource _coinBrickAudio; // AudioSource component for the brick's audio effects.
-    public AudioClip coinSound; // Sound effect that is played when the player hits the brick and gets a coin.
-    
-    // A static readonly integer that represents the "Touch_b" parameter hash in the animator.
+    /// <summary>
+    /// Indicates if the brick has been touched by the player.
+    /// </summary>
+    public bool isTouchByPlayer;
+
+    /// <summary>
+    /// Determines if the brick is a regular brick or a special one.
+    /// </summary>
+    public bool isNotSpecialBrick;
+
+    /// <summary>
+    /// Animator component for controlling the brick's animations.
+    /// </summary>
+    private Animator _coinBrickAnim;
+
+    /// <summary>
+    /// AudioSource component for the brick's audio effects.
+    /// </summary>
+    private AudioSource _coinBrickAudio;
+
+    /// <summary>
+    /// Sound effect that is played when the player hits the brick and gets a coin.
+    /// </summary>
+    public AudioClip coinSound;
+
+    /// <summary>
+    /// A static readonly integer that represents the "Touch_b" parameter hash in the animator.
+    /// </summary>
     private static readonly int TouchB = Animator.StringToHash("Touch_b");
 
-    // Awake is called when the script instance is being loaded.
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
     private void Awake()
     {
         // Retrieve the AudioSource and Animator components from the attached game object.
@@ -21,7 +47,10 @@ public class CoinBrickController : MonoBehaviour
         _coinBrickAnim = GetComponent<Animator>();
     }
 
-    // This method is invoked when another collider enters the brick's collider.
+    /// <summary>
+    /// This method is invoked when another collider enters the brick's collider.
+    /// </summary>
+    /// <param name="other">The collider that entered the brick's collider.</param>
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Check if the collided object has one of the player-related tags and if the brick hasn't been touched before.

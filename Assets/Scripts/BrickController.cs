@@ -4,18 +4,57 @@ using SystemScripts;
 using UnityEngine;
 using AdditionalScripts;
 
+/// <summary>
+/// Controls the behavior of a brick in the game.
+/// </summary>
 public class BrickController : MonoBehaviour
 {
+    /// <summary>
+    /// Indicates whether the brick has been touched by the player.
+    /// </summary>
     public bool isTouchByPlayer;
+
+    /// <summary>
+    /// Indicates whether the brick is a special brick.
+    /// </summary>
     public bool isSpecialBrick;
+
+    /// <summary>
+    /// The health of the special brick.
+    /// </summary>
     public int specialBrickHealth;
+
+    /// <summary>
+    /// The box collider component to disable when the brick is broken.
+    /// </summary>
     public BoxCollider2D disableCollider;
+
+    /// <summary>
+    /// The game object representing the broken brick pieces.
+    /// </summary>
     public GameObject breakBrickPieces;
+
+    /// <summary>
+    /// The game object representing the animation sprite.
+    /// </summary>
     public GameObject animationSprite;
+
     private Animator _brickAnim;
     private AudioSource _brickAudio;
+
+    /// <summary>
+    /// The sound played when the brick is bumped.
+    /// </summary>
     public AudioClip bumpSound;
+
+    /// <summary>
+    /// The sound played when the brick is broken.
+    /// </summary>
     public AudioClip breakSound;
+
+    /// <summary>
+    /// The sound played when a coin is collected from the brick.
+    /// </summary>
     public AudioClip coinSound;
 
     // Hash codes for the animation states

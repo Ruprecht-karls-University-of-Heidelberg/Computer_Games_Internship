@@ -3,101 +3,128 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using AdditionalScripts;
 
-//after changing
-
 namespace SystemScripts
 {
+    /// <summary>
+    /// Represents a script for loading the level scene from the loading scene.
+    /// </summary>
     public class LoadingSceneToLevelScene : MonoBehaviour
     {
-        public GameObject liveStat;           // Represents statistics of player lives.
-        public GameObject gameOverPopup;      // Shows up when the player loses all lives.
-        private AudioSource _loadSceneAudio;  // Handles audio for scene transitions.
-        public AudioClip gameOverSound;       // Sound effect for game over event.
+        /// <summary>
+        /// Represents the GameObject that displays the statistics of player lives.
+        /// </summary>
+        public GameObject liveStat;
 
-        // Called when the scene begins.
+        /// <summary>
+        /// Represents the GameObject that shows up when the player loses all lives.
+        /// </summary>
+        public GameObject gameOverPopup;
+
+        /// <summary>
+        /// Represents the AudioSource component for handling audio during scene transitions.
+        /// </summary>
+        private AudioSource _loadSceneAudio;
+
+        /// <summary>
+        /// Represents the sound effect for the game over event.
+        /// </summary>
+        public AudioClip gameOverSound;
+
+        /// <summary>
+        /// Called when the scene starts.
+        /// </summary>
         private void Start()
         {
-            // Acquire the AudioSource component attached to this object.
             _loadSceneAudio = GetComponent<AudioSource>();
-
-            // Check the player's remaining lives.
             CheckPlayerLives();
-
-            // Process scene loading based on the game's state.
             ProcessSceneLoading();
         }
 
-        // Checks and updates the player's live status.
+        /// <summary>
+        /// Checks and updates the player's live status.
+        /// </summary>
         private void CheckPlayerLives()
         {
             if (ToolController.Live < 1)
             {
-                ToolController.IsGameOver = true;  // Flag the game as over.
+                ToolController.IsGameOver = true;
             }
         }
 
-        // Decides which scene to load next based on the game state.
+        /// <summary>
+        /// Decides which scene to load next based on the game state.
+        /// </summary>
         private void ProcessSceneLoading()
         {
             if (!ToolController.IsGameOver)
             {
-                LoadLevelOrRepeat();  // Load appropriate level scene.
+                LoadLevelOrRepeat();
             }
             else
             {
-                HandleGameOver();  // Process game over scenario.
+                HandleGameOver();
             }
         }
 
-        // Loads the next level or repeats the current one.
+        /// <summary>
+        /// Loads the next level or repeats the current one.
+        /// </summary>
         private void LoadLevelOrRepeat()
         {
             if (ToolController.IsDead)
             {
-                StartCoroutine(RepeatLevelScene());  // Reload the current level.
+                StartCoroutine(RepeatLevelScene());
             }
             else
             {
-                StartCoroutine(LevelScene());  // Proceed to the next level.
+                StartCoroutine(LevelScene());
             }
         }
 
-        // Handles the game over situation.
+        /// <summary>
+        /// Handles the game over situation.
+        /// </summary>
         private void HandleGameOver()
         {
             liveStat.SetActive(false);
             gameOverPopup.SetActive(true);
             _loadSceneAudio.PlayOneShot(gameOverSound);
-            StartCoroutine(StartingScene());  // Transition to the starting scene.
+            StartCoroutine(StartingScene());
         }
 
-        // Coroutine to load the next level.
+        /// <summary>
+        /// Coroutine to load the next level.
+        /// </summary>
         private static IEnumerator LevelScene()
         {
             yield return new WaitForSeconds(2);
             SceneManager.LoadScene(ToolController.CurrentLevel);
-            ToolController.CurrentLevel += 1;  // Advance to the next level.
+            ToolController.CurrentLevel += 1;
         }
 
-        // Coroutine to repeat the current level.
+        /// <summary>
+        /// Coroutine to repeat the current level.
+        /// </summary>
         private static IEnumerator RepeatLevelScene()
         {
             yield return new WaitForSeconds(2);
             SceneManager.LoadScene(ToolController.CurrentLevel - 1);
-            ToolController.IsDead = false;  // Reset player's death status.
+            ToolController.IsDead = false;
         }
 
-        // Coroutine for transitioning to the start scene after game over.
+        /// <summary>
+        /// Coroutine for transitioning to the start scene after game over.
+        /// </summary>
         private static IEnumerator StartingScene()
         {
             yield return new WaitForSeconds(4.5f);
-            SceneManager.LoadScene(0);  // Return to the start scene.
-
-            // Reset game settings to initial values.
+            SceneManager.LoadScene(0);
             ResetGameParameters();
         }
 
-        // Resets game parameters to their default states.
+        /// <summary>
+        /// Resets game parameters to their default states.
+        /// </summary>
         private static void ResetGameParameters()
         {
             ToolController.Live = 3;

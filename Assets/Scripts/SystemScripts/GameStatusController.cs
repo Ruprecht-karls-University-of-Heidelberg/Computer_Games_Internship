@@ -3,29 +3,97 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using AdditionalScripts;
-//after changing
 
+/// <summary>
+/// Namespace containing system scripts for game status control.
+/// </summary>
 namespace SystemScripts
 {
+    /// <summary>
+    /// Class that controls the game status and UI elements.
+    /// </summary>
     public class GameStatusController : MonoBehaviour
     {
+        /// <summary>
+        /// Reference to the player score text UI element.
+        /// </summary>
         public TextMeshProUGUI playerScoreText;
+
+        /// <summary>
+        /// Reference to the player high score text UI element.
+        /// </summary>
         public TextMeshProUGUI playerHighScoreText;
+
+        /// <summary>
+        /// Reference to the collected coin text UI element.
+        /// </summary>
         public TextMeshProUGUI collectedCoinText;
+
+        /// <summary>
+        /// Reference to the level text UI element.
+        /// </summary>
         public TextMeshProUGUI levelText;
+
+        /// <summary>
+        /// Reference to the seconds text UI element.
+        /// </summary>
         public TextMeshProUGUI secondsText;
+
+        /// <summary>
+        /// Reference to the lives text UI element.
+        /// </summary>
         public TextMeshProUGUI livesText;
+
+        /// <summary>
+        /// Prefab for the score 200 popup.
+        /// </summary>
         public GameObject score200Prefab;
+
+        /// <summary>
+        /// Prefab for the score 1000 popup.
+        /// </summary>
         public GameObject score1000Prefab;
+
+        /// <summary>
+        /// Reference to the pause popup UI element.
+        /// </summary>
         public GameObject pausePopup;
+
+        /// <summary>
+        /// Reference to the instruction popup UI element.
+        /// </summary>
         public GameObject instructionPopup;
+
+        /// <summary>
+        /// Reference to the credit popup UI element.
+        /// </summary>
         public GameObject creditPopup;
+
+        /// <summary>
+        /// Reference to the first message popup UI element.
+        /// </summary>
         public GameObject firstMessagePopup;
+
+        /// <summary>
+        /// Reference to the second message popup UI element.
+        /// </summary>
         public GameObject secondMessagePopup;
+
+        /// <summary>
+        /// Parent transform for the score popups.
+        /// </summary>
         public Transform scoreParent;
+
         private AudioSource _gameStatusAudio;
 
+        /// <summary>
+        /// Audio clip for the pause sound.
+        /// </summary>
         public AudioClip pauseSound;
+
+        /// <summary>
+        /// Audio clip for the stage clear sound.
+        /// </summary>
         public AudioClip stageClearSound;
 
         private bool _pauseTrigger;
@@ -39,24 +107,29 @@ namespace SystemScripts
             ResetPauseTrigger();
         }
 
-        // Sets the high score on the UI at the start.
+        /// <summary>
+        /// Sets the high score on the UI at the start.
+        /// </summary>
         private void InitializeHighScoreDisplay()
         {
             SetScore(playerHighScoreText, ToolController._highScore);
         }
 
-        // Prepares the audio source component for use.
+        /// <summary>
+        /// Prepares the audio source component for use.
+        /// </summary>
         private void PrepareAudioSource()
         {
             _gameStatusAudio = GetComponent<AudioSource>();
         }
 
-        // Resets the pause trigger to its default state.
+        /// <summary>
+        /// Resets the pause trigger to its default state.
+        /// </summary>
         private void ResetPauseTrigger()
         {
             _pauseTrigger = false;
         }
-
 
         private void Update()
         {
@@ -68,7 +141,9 @@ namespace SystemScripts
             UpdateUIElements();
         }
 
-        // Checks and handles the stage clearing event.
+        /// <summary>
+        /// Checks and handles the stage clearing event.
+        /// </summary>
         private void CheckAndHandleStageClear()
         {
             if (ToolController.IsStageClear)
@@ -78,13 +153,17 @@ namespace SystemScripts
             }
         }
 
-        // Plays audio for stage clearance.
+        /// <summary>
+        /// Plays audio for stage clearance.
+        /// </summary>
         private void PlayStageClearAudio()
         {
             _gameStatusAudio.PlayOneShot(stageClearSound);
         }
 
-        // Displays a message when required.
+        /// <summary>
+        /// Displays a message when required.
+        /// </summary>
         private void DisplayMessageIfNeeded()
         {
             if (ToolController.IsShowMessage)
@@ -93,7 +172,9 @@ namespace SystemScripts
             }
         }
 
-        // Processes events related to enemy defeat or coin collection.
+        /// <summary>
+        /// Processes events related to enemy defeat or coin collection.
+        /// </summary>
         private void HandleEnemyDeathOrCoinCollection()
         {
             if (ToolController.IsEnemyDieOrCoinEat)
@@ -103,7 +184,9 @@ namespace SystemScripts
             }
         }
 
-        // Responds to power-up consumption.
+        /// <summary>
+        /// Responds to power-up consumption.
+        /// </summary>
         private void HandlePowerUpConsumption()
         {
             if (ToolController.IsPowerUpEat)
@@ -113,7 +196,9 @@ namespace SystemScripts
             }
         }
 
-        // Updates high score if current score exceeds it.
+        /// <summary>
+        /// Updates high score if current score exceeds it.
+        /// </summary>
         private void UpdateHighScoreIfNeeded()
         {
             if (ToolController.Score > ToolController._highScore)
@@ -122,10 +207,11 @@ namespace SystemScripts
             }
         }
 
-        // Updates various UI elements.
+        /// <summary>
+        /// Updates various UI elements.
+        /// </summary>
         private void UpdateUIElements()
         {
-
             SetCoin();
             SetLevel();
             SetScore(playerScoreText, ToolController.Score);
@@ -133,28 +219,35 @@ namespace SystemScripts
             Pause();
         }
 
-
-        // Updates the score display with appropriate formatting.
+        /// <summary>
+        /// Updates the score display with appropriate formatting.
+        /// </summary>
         private void SetScore(TextMeshProUGUI scoreText, int score)
         {
             string formattedScore = FormatScore(score);
             scoreText.SetText(formattedScore);
         }
 
-        // Formats the score as a string with leading zeros.
+        /// <summary>
+        /// Formats the score as a string with leading zeros.
+        /// </summary>
         private string FormatScore(int score)
         {
             return score.ToString("D6");
         }
 
-        // Sets the display for collected coins.
+        /// <summary>
+        /// Sets the display for collected coins.
+        /// </summary>
         private void SetCoin()
         {
             string coinDisplay = FormatCoinDisplay(ToolController.CollectedCoin);
             collectedCoinText.SetText(coinDisplay);
         }
 
-        // Formats the coin count for display.
+        /// <summary>
+        /// Formats the coin count for display.
+        /// </summary>
         private string FormatCoinDisplay(int coinCount)
         {
             if (coinCount > 99)
@@ -163,14 +256,18 @@ namespace SystemScripts
             return coinCount > 0 ? $"x{coinCount:D2}" : "x00";
         }
 
-        // Adjusts the timer display based on the given seconds.
+        /// <summary>
+        /// Adjusts the timer display based on the given seconds.
+        /// </summary>
         public void SetTime(float second)
         {
             _second = second;
             secondsText.SetText(FormatTime(_second));
         }
 
-        // Formats the time display with leading zeros.
+        /// <summary>
+        /// Formats the time display with leading zeros.
+        /// </summary>
         private string FormatTime(float time)
         {
             if (time <= 0)
@@ -179,7 +276,6 @@ namespace SystemScripts
             int roundedTime = Mathf.RoundToInt(time);
             return roundedTime > 99 ? roundedTime.ToString() : roundedTime.ToString("D3");
         }
-
 
         private void SetLevel()
         {
@@ -191,7 +287,9 @@ namespace SystemScripts
             livesText.SetText($"x {ToolController.Live.ToString()}");
         }
 
-        // Manages the game pause functionality.
+        /// <summary>
+        /// Manages the game pause functionality.
+        /// </summary>
         private void Pause()
         {
             if (CanPauseGame())
@@ -200,13 +298,17 @@ namespace SystemScripts
             }
         }
 
-        // Checks if the game can be paused based on the current scene.
+        /// <summary>
+        /// Checks if the game can be paused based on the current scene.
+        /// </summary>
         private bool CanPauseGame()
         {
             return SceneManager.GetActiveScene().buildIndex > 1 && Input.GetKeyDown(KeyCode.P);
         }
 
-        // Toggles the pause state of the game.
+        /// <summary>
+        /// Toggles the pause state of the game.
+        /// </summary>
         private void TogglePauseState()
         {
             _gameStatusAudio.PlayOneShot(pauseSound);
@@ -215,20 +317,26 @@ namespace SystemScripts
             Time.timeScale = _pauseTrigger ? 0 : 1;
         }
 
-        // Initiates a new game session.
+        /// <summary>
+        /// Initiates a new game session.
+        /// </summary>
         public void StartGame()
         {
             LoadFirstLevel();
             ResetGameStats();
         }
 
-        // Loads the first level scene.
+        /// <summary>
+        /// Loads the first level scene.
+        /// </summary>
         private void LoadFirstLevel()
         {
             SceneManager.LoadScene(1);
         }
 
-        // Resets the game statistics to their initial state.
+        /// <summary>
+        /// Resets the game statistics to their initial state.
+        /// </summary>
         private void ResetGameStats()
         {
             ToolController.CurrentLevel = 2;
@@ -237,8 +345,6 @@ namespace SystemScripts
             ToolController.CollectedCoin = 0;
             ToolController.PlayerTag = "Player";
         }
-
-
 
         public void OpenInstructionPopup()
         {
