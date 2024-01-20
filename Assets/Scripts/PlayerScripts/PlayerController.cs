@@ -156,7 +156,6 @@ namespace PlayerScripts
             }
         }
 
-
         /// <summary>
         /// Sets animation states for the player.
         /// </summary>
@@ -445,7 +444,7 @@ namespace PlayerScripts
 
         /// <summary>
         /// Manages the player's crouching action, changing the collider and animation.
-        /// </summary>
+        /// </summary>private void HandleCrouching()
         private void HandleCrouching()
         {
             bool isBigOrUltimatePlayer = CompareTag("BigPlayer") || CompareTag("UltimateBigPlayer");
@@ -454,13 +453,12 @@ namespace PlayerScripts
                 Debug.Log("Crouching");
                 CrouchPlayer();
             }
-            else if (Input.GetKeyUp(KeyCode.DownArrow) && isBigOrUltimatePlayer && !_isAboveSpecialPipe)
+            else if (Input.GetKeyUp(KeyCode.DownArrow) && isBigOrUltimatePlayer)
             {
                 Debug.Log("Standing Up");
                 StandUpPlayer();
             }
         }
-
         /// <summary>
         /// Activates the crouching animation and adjusts the collider for a small player.
         /// </summary>
@@ -544,7 +542,21 @@ namespace PlayerScripts
             {
                 _playerAudio.PlayOneShot(kickSound);
             }
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                HandleEnemyCollision();
+            }
         }
+
+        private void ChangeToSmallPlayer()
+        {
+            ToolController.IsBigPlayer = false;
+            ToolController.PlayerTag = "Player";
+            tag = "Player";  // Ensure the GameObject's tag is updated
+            ChangeAnim(); // Ensure this updates the player's visual representation and collider size
+                          // Ensure you disable any big player-specific behaviors or colliders
+        }
+
 
 
         /// <summary>
@@ -690,6 +702,23 @@ namespace PlayerScripts
             // Disables further collision with the item
             _isEatable = false;
         }
+
+        private void HandleEnemyCollision()
+        {
+            if (CompareTag("BigPlayer") || CompareTag("UltimateBigPlayer"))
+            {
+                // Change to small player
+                ChangeToSmallPlayer();
+                isInvulnerable = true; // Make the player temporarily invulnerable after shrinking
+                StartCoroutine(BeVulnerable()); // Start invulnerability timer
+            }
+            else
+            {
+                // Player is already small, trigger death sequence
+                Die();
+            }
+        }
+
 
         /// <summary>
         /// Resets the eatable state when exiting collision with a Power Brick.
