@@ -81,6 +81,10 @@ public class BrickController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles collision events with other objects.
+    /// </summary>
+    /// <param name="other">The collision data.</param>
     private void OnCollisionEnter2D(Collision2D other)
     {
         bool isPlayer = other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("UltimatePlayer");
@@ -98,6 +102,11 @@ public class BrickController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles collision with regular bricks.
+    /// </summary>
+    /// <param name="isPlayer">True if the colliding object is a player.</param>
+    /// <param name="isBigPlayer">True if the colliding object is a big player.</param>
     private void HandleRegularBrickCollision(bool isPlayer, bool isBigPlayer)
     {
         if (isPlayer)
@@ -118,6 +127,9 @@ public class BrickController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles collision with special bricks.
+    /// </summary>
     private void HandleSpecialBrickCollision()
     {
         if (specialBrickHealth > 0)
@@ -132,6 +144,10 @@ public class BrickController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles collision exit events.
+    /// </summary>
+    /// <param name="other">The collision data.</param>
     private void OnCollisionExit2D(Collision2D other)
     {
         // Reset the touch by player state when the player is no longer in contact
@@ -143,7 +159,9 @@ public class BrickController : MonoBehaviour
         }
     }
 
-    // Coroutine to destroy the brick object after a short delay
+    /// <summary>
+    /// Coroutine to destroy the brick object after a short delay.
+    /// </summary>
     IEnumerator Destroy()
     {
         yield return new WaitForSeconds(1);
