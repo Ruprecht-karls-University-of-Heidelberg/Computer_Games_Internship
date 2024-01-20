@@ -1,13 +1,13 @@
 ﻿using System.Collections;
-// using SystemScripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using AdditionalScripts;
-//after changing
 
 namespace PlayerScripts
 {
-    // Manages player behaviors including movement, animations, and interactions.
+    /// <summary>
+    /// Manages player behaviors including movement, animations, and interactions.
+    /// </summary>
     public class PlayerController : MonoBehaviour
     {
         // Movement parameters
@@ -74,8 +74,12 @@ namespace PlayerScripts
         private static readonly int VulnerableB = Animator.StringToHash("Vulnerable_b");
         private static readonly int FireB = Animator.StringToHash("Fire_b");
 
+
+        /// <summary>
+        /// Initializes the player's state and components.
+        /// </summary>
         public void Awake()
-        {   
+        {
             // Initialization of player state and components
             _isFacingRight = true;
             isInvulnerable = false;
@@ -94,7 +98,9 @@ namespace PlayerScripts
             isInCastle = false;
         }
 
-        // The main update loop where player input and state are checked each frame
+        /// <summary>
+        /// The main update loop where player input and state are checked each frame.
+        /// </summary>
         public void Update()
         {
             if (IsUpdateConditionsMet())
@@ -110,13 +116,18 @@ namespace PlayerScripts
             }
         }
 
-// Checks if the player can update their state (not dead, game not finished, etc.)
+        /// <summary>
+        /// Checks if the player can update their state (not dead, game not finished, etc.).
+        /// </summary>
+        /// <returns>Returns true if update conditions are met, false otherwise.</returns>
         private bool IsUpdateConditionsMet()
         {
             return !isDead && !_isFinish && !ToolController.IsGameFinish;
         }
 
-// Handles the action of shooting fireballs when the space key is pressed
+        /// <summary>
+        /// Handles the action of shooting fireballs when the space key is pressed.
+        /// </summary>
         public void HandleFireballShooting()
         {
             if (Input.GetKeyDown(KeyCode.Space) && ToolController.IsFirePlayer)
@@ -126,7 +137,9 @@ namespace PlayerScripts
             }
         }
 
-// Manages the player's jumping action when the 'A' key is pressed
+        /// <summary>
+        /// Manages the player's jumping action when the 'A' key is pressed.
+        /// </summary>
         public void HandleJumping()
         {
             if (Input.GetKeyDown(KeyCode.A) && _isOnGround)
@@ -139,7 +152,11 @@ namespace PlayerScripts
             }
         }
 
-// Sets animation states for the player
+
+          /// <summary>
+        /// Sets animation states for the player.
+        /// </summary>
+        /// <param name="state">The state to set for animation.</param>
         public void SetAnimationBools(bool state)
         {
             _playerAnim.SetBool(IdleB, state);
@@ -147,7 +164,9 @@ namespace PlayerScripts
             _playerAnim.SetBool(RunB, state);
         }
 
-// Adjusts player's speed and jump force on key press
+        /// <summary>
+        /// Adjusts player's speed and jump force on key press.
+        /// </summary>
         public void HandleSpeedAndJumpForceAdjustment()
         {
             if (Input.GetKeyDown(KeyCode.S))
@@ -162,7 +181,9 @@ namespace PlayerScripts
             }
         }
 
-// Handles the player's interaction with pipes, triggering when the down arrow key is pressed
+        /// <summary>
+        /// Handles the player's interaction with pipes, triggering when the down arrow key is pressed.
+        /// </summary>
         public void HandlePipeEntry()
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) && _isAboveSpecialPipe)
@@ -171,7 +192,9 @@ namespace PlayerScripts
             }
         }
 
-// Manages the player's entry into a pipe, playing sound and starting the pipe descent animation
+        /// <summary>
+        /// Manages the player's entry into a pipe, playing sound and starting the pipe descent animation.
+        /// </summary>
         public void EnterPipe()
         {
             _isAboveSpecialPipe = false;
@@ -181,7 +204,9 @@ namespace PlayerScripts
             StartCoroutine(StopGoingDownPipe());
         }
 
-// Controls player's directional movement (left and right), flipping the player sprite as needed
+        /// <summary>
+        /// Controls player's directional movement (left and right), flipping the player sprite as needed.
+        /// </summary>
         private void HandleDirectionalMovement()
         {
             if (Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.DownArrow))
@@ -203,7 +228,10 @@ namespace PlayerScripts
             }
         }
 
-// Manages the player's animation and physics while sliding down a pipe
+
+         /// <summary>
+        /// Manages the player's animation and physics while sliding down a pipe.
+        /// </summary>
         private void HandlePipeSliding()
         {
             if (_isGoingDownPipeAble)
@@ -214,7 +242,9 @@ namespace PlayerScripts
             }
         }
 
-// Adjusts the player's collider depending on the player's current size
+        /// <summary>
+        /// Adjusts the player's collider depending on the player's current size.
+        /// </summary>
         private void SetPlayerCollider()
         {
             if (CompareTag("Player"))
@@ -227,7 +257,9 @@ namespace PlayerScripts
             }
         }
 
-// Regularly called to update the game state, manage player animations and physics
+        /// <summary>
+        /// Regularly called to update the game state, manage player animations and physics.
+        /// </summary>
         private void FixedUpdate()
         {
             HandleGameFinishState();
@@ -254,7 +286,9 @@ namespace PlayerScripts
             HandleFinishState();
         }
 
-// Manages game state when the game is finished, including player movement
+        /// <summary>
+        /// Manages game state when the game is finished, including player movement.
+        /// </summary>
         private void HandleGameFinishState()
         {
             if (ToolController.IsGameFinish)
@@ -264,7 +298,9 @@ namespace PlayerScripts
             }
         }
 
-// Checks for player input to restart the game
+        /// <summary>
+        /// Checks for player input to restart the game.
+        /// </summary>
         private void CheckForGameRestart()
         {
             if (Input.GetKeyDown(KeyCode.Backspace))
@@ -274,7 +310,10 @@ namespace PlayerScripts
                 SceneManager.LoadScene(0);
             }
         }
-// Checks if the player has reached the position for a boss battle
+
+        /// <summary>
+        /// Checks if the player has reached the position for a boss battle.
+        /// </summary>
         private void CheckForBossBattle()
         {
             if (Mathf.RoundToInt(transform.position.x) == 285)
@@ -283,13 +322,17 @@ namespace PlayerScripts
             }
         }
 
-// Updates the player's death state based on the game controller
+        /// <summary>
+        /// Updates the player's death state based on the game controller.
+        /// </summary>
         private void UpdateDeathState()
         {
             isDead = ToolController.IsDead;
         }
 
-// Manages the player's invincibility effects, including ignoring collisions
+        /// <summary>
+        /// Manages the player's invincibility effects, including ignoring collisions.
+        /// </summary>
         private void HandleInvincibility()
         {
             _invincibleTime = Time.time - _startInvincible;
@@ -300,14 +343,19 @@ namespace PlayerScripts
                 StartCoroutine(BeNormal());
             }
         }
-// Manages the player's invulnerability state, ignoring collisions temporarily
+
+        /// <summary>
+        /// Manages the player's invulnerability state, ignoring collisions temporarily.
+        /// </summary>
         private void HandleInvulnerability()
         {
             Physics2D.IgnoreLayerCollision(8, 9, true);
             StartCoroutine(BeVulnerable());
         }
 
-// Updates the player's animation states based on the current game state
+               /// <summary>
+        /// Updates the player's animation states based on the current game state.
+        /// </summary>
         private void UpdatePlayerState()
         {
             _playerAnim.SetBool(BigB, ToolController.IsBigPlayer);
@@ -315,7 +363,9 @@ namespace PlayerScripts
             ChangeAnim();
         }
 
-// Manages the player's finish state, including animations and movement
+        /// <summary>
+        /// Manages the player's finish state, including animations and movement.
+        /// </summary>
         private void HandleFinishState()
         {
             if (_isFinish)
@@ -331,7 +381,9 @@ namespace PlayerScripts
             }
         }
 
-// Executes the slide down animation when finishing the level
+        /// <summary>
+        /// Executes the slide down animation when finishing the level.
+        /// </summary>
         private void PerformSlideDown()
         {
             _playerAnim.SetBool(HugB, true);
@@ -339,7 +391,9 @@ namespace PlayerScripts
             transform.Translate(slideDownSpeed * Time.deltaTime * Vector3.down);
         }
 
-// Manages the player's interaction with the flag pole at the end of a level
+        /// <summary>
+        /// Manages the player's interaction with the flag pole at the end of a level.
+        /// </summary>
         private void HandleHugPole()
         {
             if (transform.position.x < _flagPos + 0.8f)
@@ -359,7 +413,9 @@ namespace PlayerScripts
             }
         }
 
-// Manages the player's movement, including horizontal movement and crouching
+        /// <summary>
+        /// Manages the player's movement, including horizontal movement and crouching.
+        /// </summary>
         private void MovePlayer()
         {
             if (!_isGoingDownPipeAble)
@@ -369,7 +425,9 @@ namespace PlayerScripts
             }
         }
 
-// Handles the player's horizontal movement based on player input
+        /// <summary>
+        /// Handles the player's horizontal movement based on player input.
+        /// </summary>
         private void HandleHorizontalMovement()
         {
             if (!Input.GetKey(KeyCode.DownArrow))
@@ -381,35 +439,49 @@ namespace PlayerScripts
             }
         }
 
-// Manages the player's crouching action, changing the collider and animation
+        /// <summary>
+        /// Manages the player's crouching action, changing the collider and animation.
+        /// </summary>
         private void HandleCrouching()
         {
             bool isBigOrUltimatePlayer = CompareTag("BigPlayer") || CompareTag("UltimateBigPlayer");
             if (Input.GetKey(KeyCode.DownArrow) && isBigOrUltimatePlayer && !_isAboveSpecialPipe)
             {
+                Debug.Log("Crouching");
                 CrouchPlayer();
             }
             else if (Input.GetKeyUp(KeyCode.DownArrow) && isBigOrUltimatePlayer && !_isAboveSpecialPipe)
             {
+                Debug.Log("Standing Up");
                 StandUpPlayer();
             }
         }
-// Activates the crouching animation and adjusts the collider for a small player
+
+        /// <summary>
+        /// Activates the crouching animation and adjusts the collider for a small player.
+        /// </summary>
         private void CrouchPlayer()
         {
             _playerAnim.SetBool(CrouchB, true);
             smallPlayerCollider.SetActive(true);
             bigPlayerCollider.SetActive(false);
         }
-// Deactivates the crouching animation and adjusts the collider for a big player
+
+        /// <summary>
+        /// Deactivates the crouching animation and adjusts the collider for a big player.
+        /// </summary>
         private void StandUpPlayer()
         {
+            Debug.Log("StandUpPlayer method called");
             _playerAnim.SetBool(CrouchB, false);
             smallPlayerCollider.SetActive(false);
             bigPlayerCollider.SetActive(true);
         }
 
-// Collision handling for various game objects like ground, power-ups, and hazards
+        /// <summary>
+        /// Collision handling for various game objects like ground, power-ups, and hazards.
+        /// </summary>
+        /// <param name="other">The Collision2D object representing the collision.</param>
         private void OnCollisionEnter2D(Collision2D other)
         {
             string tag = other.gameObject.tag;
@@ -470,19 +542,30 @@ namespace PlayerScripts
             }
         }
 
-// Determines if a tag is related to ground elements
+
+             /// <summary>
+        /// Determines if a tag is related to ground elements.
+        /// </summary>
+        /// <param name="tag">The tag to check.</param>
+        /// <returns>True if the tag is related to ground elements, otherwise false.</returns>
         private bool IsGroundRelatedTag(string tag)
         {
             return tag == "Ground" || tag == "Pipe" || tag == "Brick" || tag == "Stone" || tag == "SpecialPipe";
         }
-// Handles collisions with ground-related objects, setting the player on the ground
+
+        /// <summary>
+        /// Handles collisions with ground-related objects, setting the player on the ground.
+        /// </summary>
         private void HandleGroundRelatedCollision()
         {
             _isOnGround = true;
             SetAnimationBools(true);
         }
 
-// Manages the interaction with the flag pole, setting the finish state
+        /// <summary>
+        /// Manages the interaction with the flag pole, setting the finish state.
+        /// </summary>
+        /// <param name="other">The Collision2D object representing the collision.</param>
         private void HandlePoleCollision(Collision2D other)
         {
             _playerAudio.PlayOneShot(flagPoleSound);
@@ -490,7 +573,9 @@ namespace PlayerScripts
             SetFinishState();
         }
 
-// Sets the state to indicate the game level is finished
+        /// <summary>
+        /// Sets the state to indicate the game level is finished.
+        /// </summary>
         private void SetFinishState()
         {
             _isFinish = true;
@@ -501,14 +586,19 @@ namespace PlayerScripts
             StartCoroutine(PlayStageClearSound());
         }
 
-// Handles the event when the player collides with the castle
+        /// <summary>
+        /// Handles the event when the player collides with the castle.
+        /// </summary>
         private void HandleCastleCollision()
         {
             isInCastle = true;
             isWalkingToCastle = false;
             playerSprite.SetActive(false);
         }
-// Manages the event when the player falls into a death abyss
+
+        /// <summary>
+        /// Manages the event when the player falls into a death abyss.
+        /// </summary>
         private void HandleDeathAbyssCollision()
         {
             _playerAudio.PlayOneShot(dieSound);
@@ -516,7 +606,10 @@ namespace PlayerScripts
             _playerRb.isKinematic = true;
             _playerRb.velocity = Vector2.zero;
         }
-// Updates the game state when the player dies
+
+        /// <summary>
+        /// Updates the game state when the player dies.
+        /// </summary>
         private void UpdateToolControllerOnDeath()
         {
             ToolController.Live -= 1;
@@ -525,28 +618,40 @@ namespace PlayerScripts
             ToolController.PlayerTag = "Player";
             ToolController.IsDead = true;
         }
-// Handles the event of colliding with a 1-Up Mushroom
+
+        /// <summary>
+        /// Handles the event of colliding with a 1-Up Mushroom.
+        /// </summary>
         private void Handle1UpMushroomCollision()
         {
             _playerAudio.PlayOneShot(oneUpSound);
             ToolController.Live += 1;
             _isEatable = false;
         }
-// Manages the event of colliding with a Big Mushroom
+
+        /// <summary>
+        /// Manages the event of colliding with a Big Mushroom.
+        /// </summary>
         private void HandleBigMushroomCollision()
         {
             _playerAudio.PlayOneShot(turnBigSound);
             TurnIntoBigPlayer();
             _isEatable = false;
         }
-// Handles the event of colliding with an Ultimate Star
+
+        /// <summary>
+        /// Handles the event of colliding with an Ultimate Star.
+        /// </summary>
         private void HandleUltimateStarCollision()
         {
             _playerAudio.PlayOneShot(turnBigSound);
             TurnIntoUltimatePlayer();
             _isEatable = false;
         }
-// Transforms the player into an ultimate player with invincibility
+
+        /// <summary>
+        /// Transforms the player into an ultimate player with invincibility.
+        /// </summary>
         private void TurnIntoUltimatePlayer()
         {
             if (CompareTag("Player"))
@@ -562,11 +667,13 @@ namespace PlayerScripts
             _startInvincible = Time.time;   // Starts the invincibility timer
         }
 
-// Handles the event of colliding with a Fire Flower
+        /// <summary>
+        /// Handles the event of colliding with a Fire Flower.
+        /// </summary>
         private void HandleFireFlowerCollision()
         {
             _playerAudio.PlayOneShot(turnBigSound); // Plays the power-up sound
-            
+
             // Transforms the player based on the current state
             if (CompareTag("Player") || CompareTag("UltimatePlayer"))
             {
@@ -577,20 +684,26 @@ namespace PlayerScripts
                 ToolController.IsFirePlayer = true;
             }
             // Disables further collision with the item
-            _isEatable = false; 
+            _isEatable = false;
         }
 
-// Resets the eatable state when exiting collision with a Power Brick
-       private void OnCollisionExit2D(Collision2D other)
-       {
+        /// <summary>
+        /// Resets the eatable state when exiting collision with a Power Brick.
+        /// </summary>
+        private void OnCollisionExit2D(Collision2D other)
+        {
             if (other.gameObject.CompareTag("PowerBrick"))
             {
                 _isEatable = true;
             }
-       }
-// Handles collision triggers with various objects
-       private void OnTriggerEnter2D(Collider2D other)
-       {
+        }
+
+        /// <summary>
+        /// Handles collision triggers with various objects.
+        /// </summary>
+        /// <param name="other">The Collider2D object representing the collision.</param>
+        private void OnTriggerEnter2D(Collider2D other)
+        {
             switch (other.gameObject.tag)
             {
                 case "Princess":
@@ -603,117 +716,162 @@ namespace PlayerScripts
                     _playerAudio.PlayOneShot(coinSound);
                     break;
             }
-       }
-// Handles collision with the Princess
-       private void HandlePrincessCollision()
-       {
+        }
+
+              /// <summary>
+        /// Handles collision with the Princess, stopping the player's sliding speed and displaying a message.
+        /// </summary>
+        private void HandlePrincessCollision()
+        {
             slideDownSpeed = 0;
             ToolController.IsShowMessage = true;
             _playerAnim.SetFloat(SpeedF, 0);
-       }
-// Handles collision with an Axe
-       private void HandleAxeCollision(Collider2D other)
-       {
+        }
+
+        /// <summary>
+        /// Handles collision with an Axe, ending the game.
+        /// </summary>
+        /// <param name="other">The Collider2D object representing the Axe collision.</param>
+        private void HandleAxeCollision(Collider2D other)
+        {
             _playerAudio.PlayOneShot(endGameSound);
             Destroy(other.gameObject);
             ToolController.IsBossBattle = false;
             ToolController.IsGameFinish = true;
             _playerAnim.SetFloat(SpeedF, 3f);
             _playerRb.velocity = Vector2.zero;
-       }
-// Transforms the player into a Big Player
-       private void TurnIntoBigPlayer()
-       {
+        }
+
+        /// <summary>
+        /// Transforms the player into a Big Player, updating the player's tag and animation.
+        /// </summary>
+        private void TurnIntoBigPlayer()
+        {
             tag = CompareTag("Player") ? "BigPlayer" : "UltimateBigPlayer"; // Updates the player's tag
             ToolController.PlayerTag = tag; // Updates the player tag in the ToolController
             ToolController.IsBigPlayer = true; // Indicates the player is now big
             ChangeAnim(); // Changes the player's animation accordingly
-       }
+        }
 
-       public void Die()
-       {
+        /// <summary>
+        /// Initiates the player's death sequence, triggering the death animation and loading the next scene.
+        /// </summary>
+        public void Die()
+        {
             _playerAnim.SetBool(DieB, isDead);  // Triggers the death animation
             ToolController.IsDead = true;  // Updates the death state in the ToolController
             StartCoroutine(DieAnim());  // Starts the death animation coroutine
             StartCoroutine(LoadingScene()); // Starts the loading scene coroutine
-       }
-// Updates the player's speed in the animator
-       private void GetPlayerSpeed()
-       {
-        // Sets the speed based on player's velocity
+        }
+
+        /// <summary>
+        /// Updates the player's speed in the animator.
+        /// </summary>
+        private void GetPlayerSpeed()
+        {
+            // Sets the speed based on player's velocity
             _playerAnim.SetFloat(SpeedF, Mathf.Abs(_playerRb.velocity.x));
-       }
-// Changes the player's animation based on the size state
-       public void ChangeAnim()
-       {
+        }
+
+        /// <summary>
+        /// Changes the player's animation based on the size state.
+        /// </summary>
+        public void ChangeAnim()
+        {
             bool isBigPlayer = ToolController.IsBigPlayer;
             bigPlayer.SetActive(isBigPlayer);
             bigPlayerCollider.SetActive(isBigPlayer);
             smallPlayer.SetActive(!isBigPlayer);
             smallPlayerCollider.SetActive(!isBigPlayer);
-       }
-// Denies the player from jumping in mid-air
-       public void DenyMidAirJump()
-       {
+        }
+
+        /// <summary>
+        /// Denies the player from jumping in mid-air.
+        /// </summary>
+        public void DenyMidAirJump()
+        {
             _isOnGround = _playerRb.velocity.y == 0;
             SetAnimationBools(_isOnGround);
-       }
+        }
 
-// Coroutine to set the eatable state after a delay
-       private IEnumerator SetBoolEatable()
-       {
+        /// <summary>
+        /// Coroutine to set the eatable state after a delay.
+        /// </summary>
+        private IEnumerator SetBoolEatable()
+        {
             yield return new WaitForSeconds(0.5f);
             _isEatable = true;
-       }
-// Coroutine for handling the hug pole animation
-       private IEnumerator HugPole()
-       {
+        }
+
+        /// <summary>
+        /// Coroutine for handling the hug pole animation.
+        /// </summary>
+        private IEnumerator HugPole()
+        {
             yield return new WaitForSeconds(1.5f);
             _isNotHugPole = true;
-       }
-// Coroutine for the death animation sequence
-       private IEnumerator DieAnim()
-       {
+        }
+
+        /// <summary>
+        /// Coroutine for the death animation sequence.
+        /// </summary>
+        private IEnumerator DieAnim()
+        {
             yield return new WaitForSeconds(1);
             playerCol.SetActive(false);
             _playerRb.isKinematic = false;
-       }
+        }
 
-       private static IEnumerator LoadingScene()
-       {
+        /// <summary>
+        /// Coroutine for loading the next scene after death.
+        /// </summary>
+        private static IEnumerator LoadingScene()
+        {
             yield return new WaitForSeconds(3.5f);
             SceneManager.LoadScene(1);
-       }
+        }
 
-       private IEnumerator PlayStageClearSound()
-       {
+        /// <summary>
+        /// Coroutine for playing the stage clear sound.
+        /// </summary>
+        private IEnumerator PlayStageClearSound()
+        {
             yield return new WaitForSeconds(1.5f);
             ToolController.IsStageClear = true;
-       }
+        }
 
-       private IEnumerator BeVulnerable()
-       {
+        /// <summary>
+        /// Coroutine for making the player temporarily vulnerable.
+        /// </summary>
+        private IEnumerator BeVulnerable()
+        {
             yield return new WaitForSeconds(2);
             _playerAnim.SetBool(VulnerableB, true);
             Physics2D.IgnoreLayerCollision(8, 9, false);
             isInvulnerable = false;
-       }
+        }
 
-       private IEnumerator BeNormal()
-       {
+        /// <summary>
+        /// Coroutine for making the player normal after invincibility.
+        /// </summary>
+        private IEnumerator BeNormal()
+        {
             yield return new WaitForSeconds(2);
             tag = ToolController.PlayerTag;
             isInvincible = false;
             _playerAnim.SetBool(UltimateB, isInvincible);
             Physics2D.IgnoreLayerCollision(8, 9, false);
-       }
-// Coroutine for stopping the sliding down the pipe sequence
-       private IEnumerator StopGoingDownPipe()
-       {
+        }
+
+        /// <summary>
+        /// Coroutine for stopping the sliding down the pipe sequence.
+        /// </summary>
+        private IEnumerator StopGoingDownPipe()
+        {
             yield return new WaitForSeconds(1.5f);
             _isGoingDownPipeAble = false;
             SceneManager.LoadScene(ToolController.CurrentLevel);
             ToolController.CurrentLevel += 1;
-       }
+        }
     }
 }

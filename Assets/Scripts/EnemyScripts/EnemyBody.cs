@@ -6,6 +6,9 @@ using AdditionalScripts;
 
 namespace EnemyScripts
 {
+    /// <summary>
+    /// Represents the body of an enemy character.
+    /// </summary>
     public class EnemyBody : MonoBehaviour
     {
         private EnemyController _enemyController;
@@ -17,6 +20,9 @@ namespace EnemyScripts
         private BoxCollider2D _boxCollider2D;
         private Rigidbody2D _playerRigidbody2D;
 
+        /// <summary>
+        /// Called when the script instance is being loaded.
+        /// </summary>
         private void Awake()
         {
             _enemyAudio = GetComponent<AudioSource>();
@@ -28,6 +34,9 @@ namespace EnemyScripts
             }
         }
 
+        /// <summary>
+        /// Called every frame.
+        /// </summary>
         private void Update()
         {
             if (_enemyController != null && _enemyController.isTouchByPlayer)
@@ -37,6 +46,10 @@ namespace EnemyScripts
             }
         }
 
+        /// <summary>
+        /// Called when this collider/rigidbody has begun touching another rigidbody/collider.
+        /// </summary>
+        /// <param name="other">The other collider/rigidbody that this collider/rigidbody is touching.</param>
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
@@ -45,6 +58,10 @@ namespace EnemyScripts
             }
         }
 
+        /// <summary>
+        /// Handles the collision with the player.
+        /// </summary>
+        /// <param name="playerGameObject">The player game object.</param>
         private void HandlePlayerCollision(GameObject playerGameObject)
         {
             PlayerController playerController = playerGameObject.GetComponent<PlayerController>();
@@ -63,6 +80,10 @@ namespace EnemyScripts
             }
         }
 
+        /// <summary>
+        /// Handles the collision with a non-invulnerable player.
+        /// </summary>
+        /// <param name="playerController">The player controller.</param>
         private void HandleNonInvulnerablePlayer(PlayerController playerController)
         {
             _enemyAudio.PlayOneShot(hitPlayerSound);
@@ -72,6 +93,10 @@ namespace EnemyScripts
             _playerRigidbody2D.velocity = Vector2.zero;
         }
 
+        /// <summary>
+        /// Handles the collision with an invulnerable player.
+        /// </summary>
+        /// <param name="playerController">The player controller.</param>
         private void HandleInvulnerablePlayer(PlayerController playerController)
         {
             if (ToolController.IsBigPlayer)
@@ -92,6 +117,11 @@ namespace EnemyScripts
             }
         }
 
+        /// <summary>
+        /// Coroutine that handles the death of the player.
+        /// </summary>
+        /// <param name="playerGameObject">The player game object.</param>
+        /// <returns>An enumerator that performs the coroutine.</returns>
         IEnumerator Die(GameObject playerGameObject)
         {
             yield return new WaitForSeconds(1);

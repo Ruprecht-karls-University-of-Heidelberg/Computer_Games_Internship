@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{AE49E75B-F17A-396A-E946-BA02DE9FA5C8}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SystemScripts/GameStatusController.cs">
+    <Files>
+      <File FileName="Assets/Scripts/PlayerScripts/PlayerController.cs" Line="417" Column="32" />
+      <File FileName="Assets/Scripts/SystemScripts/GameStatusController.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Computer_Games_Internship" expanded="True">
+            <Node name="Assets" expanded="True" selected="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="PlayerScripts" expanded="True" />
+                <Node name="SystemScripts" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.AdditionalAssembly PreferredExecutionTarget="ea110726-d7cc-45b6-a4ab-42ff576fb9fc" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

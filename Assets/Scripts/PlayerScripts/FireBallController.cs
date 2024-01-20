@@ -1,106 +1,131 @@
 ﻿using System.Collections;
-// using SystemScripts;
 using UnityEngine;
 using AdditionalScripts;
 
-// Namespace for player-related scripts.
+/// <summary>
+/// Namespace for player-related scripts.
+/// </summary>
 namespace PlayerScripts
-
-//after changing
-
 {
+    /// <summary>
+    /// Controls the behavior of fireballs launched by the player.
+    /// </summary>
     public class FireBallController : MonoBehaviour
     {
+        /// <summary>
+        /// The speed at which the fireball moves.
+        /// </summary>
         public float speed;
 
         private Rigidbody2D _fireBallRb;
         private Animator _fireBallAnim;
 
-        // Hash for the destroy animation trigger
+        /// <summary>
+        /// Hash for the destroy animation trigger.
+        /// </summary>
         private static readonly int DestroyT = Animator.StringToHash("Destroy_t");
 
+        /// <summary>
+        /// Initializes components and sets the initial velocity of the fireball.
+        /// </summary>
         void Start()
         {
             InitializeComponents();
             SetInitialVelocity();
         }
 
+        /// <summary>
+        /// Initializes the animator and rigidbody components.
+        /// </summary>
         public void InitializeComponents()
         {
             _fireBallAnim = GetComponent<Animator>();
             _fireBallRb = GetComponent<Rigidbody2D>();
         }
 
+        /// <summary>
+        /// Sets the initial velocity of the fireball.
+        /// </summary>
         public void SetInitialVelocity()
         {
-            // Set the velocity of the fireball
             _fireBallRb.velocity = transform.right * speed;
         }
 
+        /// <summary>
+        /// Handles collision events of the fireball.
+        /// </summary>
+        /// <param name="other">The collision data associated with this collision.</param>
         public void OnCollisionEnter2D(Collision2D other)
         {
-            // Handle different collision scenarios
             HandleCollisionWithGroundOrStone(other);
             HandleCollisionWithPiranha(other);
         }
 
+        /// <summary>
+        /// Handles collisions with ground or stone, making the fireball bounce upward.
+        /// </summary>
+        /// <param name="other">The collision data.</param>
         private void HandleCollisionWithGroundOrStone(Collision2D other)
         {
-            // Check for collision with ground or stone
             if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Stone"))
             {
-                BounceUpward(); // Bounce the fireball upward
-                // Check if the fireball has stopped and destroy if true
+                BounceUpward();
                 CheckAndDestroyIfStopped();
             }
             else
             {
-                // Trigger destroy animation for other collisions
                 TriggerDestroyAnimation();
             }
         }
 
+        /// <summary>
+        /// Applies an upward force to the fireball, causing it to bounce.
+        /// </summary>
         private void BounceUpward()
         {
-            // Add an upward force to the fireball
             _fireBallRb.AddForce(new Vector2(0, 180));
         }
 
+        /// <summary>
+        /// Checks if the fireball has stopped moving and triggers its destruction if true.
+        /// </summary>
         private void CheckAndDestroyIfStopped()
         {
-            // Check if the fireball has stopped moving
             if (Mathf.RoundToInt(_fireBallRb.velocity.x) == 0)
             {
-                // Trigger destroy animation if the fireball has stopped
                 TriggerDestroyAnimation();
             }
         }
 
+        /// <summary>
+        /// Handles collisions with Piranha, causing the Piranha to be destroyed.
+        /// </summary>
+        /// <param name="other">The collision data.</param>
         private void HandleCollisionWithPiranha(Collision2D other)
         {
-            // Check for collision with Piranha
             if (other.gameObject.CompareTag("Piranha"))
             {
-                // Update state to indicate enemy death or coin eaten
                 ToolController.IsEnemyDieOrCoinEat = true;
-                // Destroy the enemy object
                 Destroy(other.gameObject);
             }
         }
 
+        /// <summary>
+        /// Triggers the destroy animation of the fireball.
+        /// </summary>
         public void TriggerDestroyAnimation()
         {
-            // Trigger the destroy animation
             _fireBallAnim.SetTrigger(DestroyT);
-            // Start coroutine to destroy the fireball
             StartCoroutine(DestroyFireball());
         }
 
+        /// <summary>
+        /// Coroutine to destroy the fireball after a short delay.
+        /// </summary>
+        /// <returns>IEnumerator for coroutine.</returns>
         public IEnumerator DestroyFireball()
         {
-            // Coroutine to destroy the fireball after a delay
             yield return new WaitForSeconds(0.02f);
-            // Destroy the fireball object
             Destroy(gameObject);
         }
     }

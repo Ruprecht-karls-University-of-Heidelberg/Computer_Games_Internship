@@ -1,10 +1,11 @@
-﻿//using SystemScripts;
-using UnityEngine;
+﻿using UnityEngine;
 using AdditionalScripts;
 
 namespace EnemyScripts
 {
-    // This script manages the behavior when the enemy's head is hit by the player.
+    /// <summary>
+    /// This script manages the behavior when the enemy's head is hit by the player.
+    /// </summary>
     public class EnemyHead : MonoBehaviour
     {
         // Reference to the enemy controller script for the enemy.
@@ -26,7 +27,10 @@ namespace EnemyScripts
             _enemyController = enemy.GetComponent<EnemyController>();
         }
 
-        // Handle collision events with other objects.
+        /// <summary>
+        /// Handle collision events with other objects.
+        /// </summary>
+        /// <param name="other">The collision data.</param>
         private void OnCollisionEnter2D(Collision2D other)
         {
             // If the collision is with the Player or BigPlayer, manage the enemy's death and play the hit sound.

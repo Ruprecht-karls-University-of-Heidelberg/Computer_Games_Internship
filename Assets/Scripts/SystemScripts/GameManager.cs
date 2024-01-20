@@ -10,6 +10,9 @@ using AdditionalScripts;
 
 namespace SystemScripts
 {
+    /// <summary>
+    /// Manages the game logic and elements.
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
         public PlayerController player;
@@ -24,14 +27,18 @@ namespace SystemScripts
         public float time = 400;
         public float finalTime;
 
-        // Initializes game elements upon object awakening.
+        /// <summary>
+        /// Initializes game elements upon object awakening.
+        /// </summary>
         private void Awake()
         {
             InitializeStairwaySpawning();
             InitializeGameTime();
         }
 
-        // Prepares stairway spawning if the level requires it.
+        /// <summary>
+        /// Prepares stairway spawning if the level requires it.
+        /// </summary>
         private void InitializeStairwaySpawning()
         {
             if (isStairLevel)
@@ -40,7 +47,9 @@ namespace SystemScripts
             }
         }
 
-        // Sets the initial game time in the status controller.
+        /// <summary>
+        /// Sets the initial game time in the status controller.
+        /// </summary>
         private void InitializeGameTime()
         {
             if (gameStatusController != null)
@@ -49,7 +58,9 @@ namespace SystemScripts
             }
         }
 
-        // Regularly updates game elements each frame.
+        /// <summary>
+        /// Regularly updates game elements each frame.
+        /// </summary>
         private void Update()
         {
             if (player != null)
@@ -58,7 +69,9 @@ namespace SystemScripts
             }
         }
 
-        // Conducts updates related to player actions and states.
+        /// <summary>
+        /// Conducts updates related to player actions and states.
+        /// </summary>
         private void PerformPlayerRelatedUpdates()
         {
             HaltEnemiesOnPlayerDeath();
@@ -70,37 +83,49 @@ namespace SystemScripts
             CaptureFinalTimeOnTimeStop();
         }
 
-        // Stops enemies from moving if the player has died.
+        /// <summary>
+        /// Stops enemies from moving if the player has died.
+        /// </summary>
         private void HaltEnemiesOnPlayerDeath()
         {
             StopEnemiesFromMovingWhenPlayerDie();
         }
 
-        // Activates enemies when they detect the player.
+        /// <summary>
+        /// Activates enemies when they detect the player.
+        /// </summary>
         private void ActivateEnemiesUponPlayerDetection()
         {
             SetActiveEnemiesWhenSeePlayer();
         }
 
-        // Removes enemies that have moved out of bounds.
+        /// <summary>
+        /// Removes enemies that have moved out of bounds.
+        /// </summary>
         private void EliminateOutOfBoundsEnemies()
         {
             DestroyEnemiesOutOfBound();
         }
 
-        // Updates the remaining game time.
+        /// <summary>
+        /// Updates the remaining game time.
+        /// </summary>
         private void CountDownTime()
         {
             UpdateTime();
         }
 
-        // Executes a complete destruction under certain conditions.
+        /// <summary>
+        /// Executes a complete destruction under certain conditions.
+        /// </summary>
         private void ExecuteUltimateDestruction()
         {
             UltimateDestroyAll();
         }
 
-        // Records the final time when time-stop is activated by the player.
+        /// <summary>
+        /// Records the final time when time-stop is activated by the player.
+        /// </summary>
         private void CaptureFinalTimeOnTimeStop()
         {
             if (player.isStopTime)
@@ -110,8 +135,9 @@ namespace SystemScripts
             }
         }
 
-
-        // Halts the movement of all enemies if the player has been defeated.
+        /// <summary>
+        /// Halts the movement of all enemies if the player has been defeated.
+        /// </summary>
         private void StopEnemiesFromMovingWhenPlayerDie()
         {
             // Exit if the player is not dead.
@@ -133,7 +159,9 @@ namespace SystemScripts
             }
         }
 
-        // Freezes the enemy's movement and sets it as kinematic.
+        /// <summary>
+        /// Freezes the enemy's movement and sets it as kinematic.
+        /// </summary>
         private void FreezeEnemy(EnemyController enemyController)
         {
             enemyController.speed = 0;
@@ -142,8 +170,9 @@ namespace SystemScripts
             enemyRigidbody.isKinematic = true;
         }
 
-
-// Activates enemies within a certain distance of the player.
+        /// <summary>
+        /// Activates enemies within a certain distance of the player.
+        /// </summary>
         private void SetActiveEnemiesWhenSeePlayer()
         {
             // Reverse iteration to safely modify the list during iteration.
@@ -161,7 +190,9 @@ namespace SystemScripts
             }
         }
 
-        // Activates an enemy game object if it is close to the player.
+        /// <summary>
+        /// Activates an enemy game object if it is close to the player.
+        /// </summary>
         private void ActivateEnemyIfCloseToPlayer(GameObject enemyGameObject)
         {
             float distanceToPlayer = Mathf.Abs(enemyGameObject.transform.position.x - player.transform.position.x);
@@ -171,8 +202,9 @@ namespace SystemScripts
             }
         }
 
-
-
+        /// <summary>
+        /// Removes enemies that have moved out of bounds.
+        /// </summary>
         private void DestroyEnemiesOutOfBound()
         {
             for (var i = 0; i < enemyGameObjects.Count; i++)
@@ -191,7 +223,9 @@ namespace SystemScripts
             }
         }
 
-        // Manages the countdown of game time and updates game state based on time.
+        /// <summary>
+        /// Manages the countdown of game time and updates game state based on time.
+        /// </summary>
         private void UpdateTime()
         {
             if (ShouldDecrementTime())
@@ -205,19 +239,25 @@ namespace SystemScripts
             }
         }
 
-        // Determines if time should be decremented based on game conditions.
+        /// <summary>
+        /// Determines if time should be decremented based on game conditions.
+        /// </summary>
         private bool ShouldDecrementTime()
         {
             return !ToolController.IsDead && !player.isWalkingToCastle && !player.isInCastle && !ToolController.IsGameFinish;
         }
 
-        // Decrements the game time.
+        /// <summary>
+        /// Decrements the game time.
+        /// </summary>
         private void DecrementTime()
         {
             gameStatusController.SetTime(time -= Time.deltaTime * 2);
         }
 
-        // Checks if time has run out and sets the player as dead.
+        /// <summary>
+        /// Checks if time has run out and sets the player as dead.
+        /// </summary>
         private void CheckTimeForDeath()
         {
             if (time < 0)
@@ -227,20 +267,26 @@ namespace SystemScripts
             }
         }
 
-        // Manages time updates when the player is in the castle.
+        /// <summary>
+        /// Manages time updates when the player is in the castle.
+        /// </summary>
         private void UpdateCastleTime()
         {
             DecrementCastleTime();
             AwardScoreForTimeInCastle();
         }
 
-        // Decrements time faster when the player is in the castle.
+        /// <summary>
+        /// Decrements time faster when the player is in the castle.
+        /// </summary>
         private void DecrementCastleTime()
         {
             gameStatusController.SetTime(time -= Time.deltaTime * 60);
         }
 
-        // Awards score based on time spent in the castle and checks for level completion.
+        /// <summary>
+        /// Awards score based on time spent in the castle and checks for level completion.
+        /// </summary>
         private void AwardScoreForTimeInCastle()
         {
             if (time < 0)
@@ -254,7 +300,9 @@ namespace SystemScripts
             }
         }
 
-        // Awards score for each second spent in the castle.
+        /// <summary>
+        /// Awards score for each second spent in the castle.
+        /// </summary>
         private void AwardScorePerSecond()
         {
             if (finalTime - time >= 1f)
@@ -264,8 +312,9 @@ namespace SystemScripts
             }
         }
 
-
-        // Executes the ultimate destruction of enemies based on player's state.
+        /// <summary>
+        /// Executes the ultimate destruction of enemies based on player's state.
+        /// </summary>
         private void UltimateDestroyAll()
         {
             if (IsPlayerInUltimateState())
@@ -274,13 +323,17 @@ namespace SystemScripts
             }
         }
 
-        // Determines if the player is in an ultimate state.
+        /// <summary>
+        /// Determines if the player is in an ultimate state.
+        /// </summary>
         private bool IsPlayerInUltimateState()
         {
             return player.CompareTag("UltimatePlayer") || player.CompareTag("UltimateBigPlayer");
         }
 
-        // Processes each enemy for potential destruction in the ultimate state.
+        /// <summary>
+        /// Processes each enemy for potential destruction in the ultimate state.
+        /// </summary>
         private void ProcessEnemiesForUltimateDestruction()
         {
             for (int i = enemyControllers.Count - 1; i >= 0; i--)
@@ -296,7 +349,9 @@ namespace SystemScripts
             }
         }
 
-        // Evaluates and destroys the enemy if conditions are met.
+        /// <summary>
+        /// Evaluates and destroys the enemy if conditions are met.
+        /// </summary>
         private void EvaluateAndDestroyEnemy(int index)
         {
             float distance = Mathf.RoundToInt(enemyControllers[index].gameObject.transform.position.x - player.transform.position.x);
@@ -310,8 +365,9 @@ namespace SystemScripts
             }
         }
 
-
-        // Eliminates and removes enemies based on proximity to the player.
+        /// <summary>
+        /// Eliminates and removes enemies based on proximity to the player.
+        /// </summary>
         private void KillAndRemoveEnemies(int i, float distance)
         {
             if (IsEnemyWithinVerticalDistance(i, distance))
@@ -320,14 +376,18 @@ namespace SystemScripts
             }
         }
 
-        // Checks if the enemy is within a specified vertical distance from the player.
+        /// <summary>
+        /// Checks if the enemy is within a specified vertical distance from the player.
+        /// </summary>
         private bool IsEnemyWithinVerticalDistance(int index, float distance)
         {
             float verticalDistance = enemyControllers[index].gameObject.transform.position.y - player.transform.position.y;
             return verticalDistance < distance && verticalDistance > -distance;
         }
 
-        // Increments score, triggers effects, and removes the enemy.
+        /// <summary>
+        /// Increments score, triggers effects, and removes the enemy.
+        /// </summary>
         private void IncrementScoreAndTriggerEffects(int index)
         {
             ToolController.Score += 200;
@@ -336,7 +396,9 @@ namespace SystemScripts
             enemyControllers.RemoveAt(index);
         }
 
-
+        /// <summary>
+        /// Spawns stairways for the level.
+        /// </summary>
         private void SpawnStairway()
         {
             GameObject stairwayDown = Instantiate(stairwayPrefab, stairwayDownParent);
@@ -345,16 +407,22 @@ namespace SystemScripts
             StartCoroutine(DestroyStair(stairwayUp));
         }
 
+        /// <summary>
+        /// Loads the next level after a delay.
+        /// </summary>
         private static IEnumerator NextLevel()
         {
             yield return new WaitForSeconds(3);
             SceneManager.LoadScene(1);
         }
 
-        private IEnumerator DestroyStair(GameObject stair)
+        /// <summary>
+        /// Destroys the stairway after a delay.
+        /// </summary>
+        private static IEnumerator DestroyStair(GameObject stairway)
         {
-            yield return new WaitForSeconds(5.3f);
-            Destroy(stair);
+            yield return new WaitForSeconds(10);
+            Destroy(stairway);
         }
     }
 }
