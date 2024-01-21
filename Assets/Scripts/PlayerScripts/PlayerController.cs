@@ -16,7 +16,7 @@ namespace PlayerScripts
         public float jumpForce = 795f;
         // State management
         private float _flagPos; // Position of the flag for end-of-level interactions
-        private float _startInvincible; // Time when invincibility starts
+        public float _startInvincible; // Time when invincibility starts
         private float _invincibleTime; // Duration of invincibility
         [Range(0, 1)] public float smoothTime = 0.6f; // Smoothness of player movement
         public bool isDead; // Indicates if the player is dead
@@ -182,7 +182,7 @@ namespace PlayerScripts
         }
 
 // Controls player's directional movement (left and right), flipping the player sprite as needed
-        private void HandleDirectionalMovement()
+        public void HandleDirectionalMovement()
         {
             if (Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.DownArrow))
             {
@@ -255,7 +255,7 @@ namespace PlayerScripts
         }
 
 // Manages game state when the game is finished, including player movement
-        private void HandleGameFinishState()
+        public void HandleGameFinishState()
         {
             if (ToolController.IsGameFinish)
             {
@@ -290,7 +290,7 @@ namespace PlayerScripts
         }
 
 // Manages the player's invincibility effects, including ignoring collisions
-        private void HandleInvincibility()
+        public void HandleInvincibility()
         {
             _invincibleTime = Time.time - _startInvincible;
             _playerAnim.SetFloat(UltimateDurationF, _invincibleTime);
@@ -370,7 +370,7 @@ namespace PlayerScripts
         }
 
 // Handles the player's horizontal movement based on player input
-        private void HandleHorizontalMovement()
+        public void HandleHorizontalMovement()
         {
             if (!Input.GetKey(KeyCode.DownArrow))
             {
@@ -622,7 +622,7 @@ namespace PlayerScripts
             _playerRb.velocity = Vector2.zero;
        }
 // Transforms the player into a Big Player
-       private void TurnIntoBigPlayer()
+       public void TurnIntoBigPlayer()
        {
             tag = CompareTag("Player") ? "BigPlayer" : "UltimateBigPlayer"; // Updates the player's tag
             ToolController.PlayerTag = tag; // Updates the player tag in the ToolController

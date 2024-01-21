@@ -1,0 +1,129 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETStandard,Version=v2.1": {
+      "AdditionalAssembly/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/AdditionalAssembly.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AdditionalAssembly.dll": {}
+        }
+      },
+      "EnemyAssembly/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "AdditionalAssembly": "1.0.0",
+          "PlayerScripts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EnemyAssembly.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EnemyAssembly.dll": {}
+        }
+      },
+      "PlayerScripts/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "AdditionalAssembly": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/PlayerScripts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PlayerScripts.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AdditionalAssembly/1.0.0": {
+      "type": "project",
+      "path": "AdditionalAssembly.csproj",
+      "msbuildProject": "AdditionalAssembly.csproj"
+    },
+    "EnemyAssembly/1.0.0": {
+      "type": "project",
+      "path": "EnemyAssembly.csproj",
+      "msbuildProject": "EnemyAssembly.csproj"
+    },
+    "PlayerScripts/1.0.0": {
+      "type": "project",
+      "path": "PlayerScripts.csproj",
+      "msbuildProject": "PlayerScripts.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETStandard,Version=v2.1": [
+      "AdditionalAssembly >= 1.0.0",
+      "EnemyAssembly >= 1.0.0",
+      "PlayerScripts >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/Users/gongyaqi/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/SystemAssembly.csproj",
+      "projectName": "SystemAssembly",
+      "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/SystemAssembly.csproj",
+      "packagesPath": "/Users/gongyaqi/.nuget/packages/",
+      "outputPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Temp/obj//SystemAssembly/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/gongyaqi/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "netstandard2.1"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "projectReferences": {
+            "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj": {
+              "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj"
+            },
+            "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/EnemyAssembly.csproj": {
+              "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/EnemyAssembly.csproj"
+            },
+            "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj": {
+              "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netstandard2.1": {
+        "targetAlias": "netstandard2.1",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

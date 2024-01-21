@@ -65,12 +65,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/PlaymodeTests/PowerUpsControllerMovementPlayModeTests.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerGameFinishStateTest.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerHorizontalMovementTest.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerJumpingTest.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerTurnIntoBigPlayerTest.cs" />
     <Compile Include="Assets/PlaymodeTests/PowerUpsControllerTriggerPlayModeTests.cs" />
     <Compile Include="Assets/PlaymodeTests/PowerUpsControllerCollisionPlayModeTests.cs" />
     <Compile Include="Assets/PlaymodeTests/EnemyControllerDestroyEnemyPlayModeTests.cs" />
     <Compile Include="Assets/PlaymodeTests/FireBallControllerPlaymodeTests.cs" />
-    <Compile Include="Assets/PlaymodeTests/PlayerControllerPlaymodetest.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerTurnintoBig.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerDieTest.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerSFAdjustmentTest.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerFireballTest.cs" />
     <Compile Include="Assets/PlaymodeTests/EnemyControllerMoveTests.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerInvincibilityTest.cs" />
+    <Compile Include="Assets/PlaymodeTests/PlayerControllerDirectionalMovementTest.cs" />
     <Compile Include="Assets/PlaymodeTests/EnemyControllerOnCollisionEnter2D.cs" />
     <Compile Include="Assets/PlaymodeTests/EnemyControllerDieTest.cs" />
   </ItemGroup>

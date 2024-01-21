@@ -1,0 +1,340 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Tests.csproj": {}
+  },
+  "projects": {
+    "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj",
+        "projectName": "AdditionalAssembly",
+        "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj",
+        "packagesPath": "/Users/gongyaqi/.nuget/packages/",
+        "outputPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Temp/obj//AdditionalAssembly/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/gongyaqi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AllAssembly.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AllAssembly.csproj",
+        "projectName": "AllAssembly",
+        "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AllAssembly.csproj",
+        "packagesPath": "/Users/gongyaqi/.nuget/packages/",
+        "outputPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Temp/obj//AllAssembly/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/gongyaqi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj"
+              },
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/SystemAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/SystemAssembly.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/EnemyAssembly.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/EnemyAssembly.csproj",
+        "projectName": "EnemyAssembly",
+        "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/EnemyAssembly.csproj",
+        "packagesPath": "/Users/gongyaqi/.nuget/packages/",
+        "outputPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Temp/obj//EnemyAssembly/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/gongyaqi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj"
+              },
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj",
+        "projectName": "PlayerScripts",
+        "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj",
+        "packagesPath": "/Users/gongyaqi/.nuget/packages/",
+        "outputPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Temp/obj//PlayerScripts/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/gongyaqi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/SystemAssembly.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/SystemAssembly.csproj",
+        "projectName": "SystemAssembly",
+        "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/SystemAssembly.csproj",
+        "packagesPath": "/Users/gongyaqi/.nuget/packages/",
+        "outputPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Temp/obj//SystemAssembly/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/gongyaqi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj"
+              },
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/EnemyAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/EnemyAssembly.csproj"
+              },
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Tests.csproj",
+        "projectName": "Tests",
+        "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Tests.csproj",
+        "packagesPath": "/Users/gongyaqi/.nuget/packages/",
+        "outputPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/Temp/obj//Tests/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/gongyaqi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AdditionalAssembly.csproj"
+              },
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AllAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/AllAssembly.csproj"
+              },
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/EnemyAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/EnemyAssembly.csproj"
+              },
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/PlayerScripts.csproj"
+              },
+              "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/SystemAssembly.csproj": {
+                "projectPath": "/Users/gongyaqi/Desktop/Computer Game Practical/NewFinal5/Computer_Games_Internship/SystemAssembly.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

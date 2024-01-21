@@ -329,8 +329,7 @@
 -analyzer:"/Applications/Unity/Hub/Editor/2022.3.17f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Editor/Tests/EnemyControllerEditModeTests.cs"
 "Assets/Editor/Tests/FireBallControllerTests.cs"
-"Assets/Editor/Tests/PlayerControllerTest.cs"
-"Assets/Editor/Tests/PlayerControllerTests2.cs"
+"Assets/Editor/Tests/PlayerControllerInitializeTest.cs"
 "Assets/Editor/Tests/PowerUpControllerTests.cs"
 -langversion:9.0
 
