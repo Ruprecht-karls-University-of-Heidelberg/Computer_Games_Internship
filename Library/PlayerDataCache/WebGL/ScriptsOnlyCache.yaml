@@ -170,17 +170,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3628}
     - Class: 114
-      Script: {instanceID: 3748}
+      Script: {instanceID: 3682}
     - Class: 114
-      Script: {instanceID: 3794}
+      Script: {instanceID: 3750}
     - Class: 114
-      Script: {instanceID: 4066}
+      Script: {instanceID: 3796}
     - Class: 114
-      Script: {instanceID: 4098}
+      Script: {instanceID: 4068}
     - Class: 114
-      Script: {instanceID: 4286}
+      Script: {instanceID: 4100}
     - Class: 114
-      Script: {instanceID: 4670}
+      Script: {instanceID: 4288}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -275,11 +275,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3628}
     - Class: 114
-      Script: {instanceID: 3794}
+      Script: {instanceID: 3682}
     - Class: 114
-      Script: {instanceID: 4098}
+      Script: {instanceID: 3796}
     - Class: 114
-      Script: {instanceID: 4670}
+      Script: {instanceID: 4100}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -376,17 +376,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3628}
     - Class: 114
-      Script: {instanceID: 3748}
+      Script: {instanceID: 3682}
     - Class: 114
-      Script: {instanceID: 3794}
+      Script: {instanceID: 3750}
     - Class: 114
-      Script: {instanceID: 4066}
+      Script: {instanceID: 3796}
     - Class: 114
-      Script: {instanceID: 4098}
+      Script: {instanceID: 4068}
     - Class: 114
-      Script: {instanceID: 4286}
+      Script: {instanceID: 4100}
     - Class: 114
-      Script: {instanceID: 4670}
+      Script: {instanceID: 4288}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -477,15 +477,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3628}
     - Class: 114
-      Script: {instanceID: 3748}
+      Script: {instanceID: 3682}
     - Class: 114
-      Script: {instanceID: 3794}
+      Script: {instanceID: 3750}
     - Class: 114
-      Script: {instanceID: 4066}
+      Script: {instanceID: 3796}
     - Class: 114
-      Script: {instanceID: 4098}
+      Script: {instanceID: 4068}
     - Class: 114
-      Script: {instanceID: 4670}
+      Script: {instanceID: 4100}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -552,7 +552,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2992}
     - Class: 114
-      Script: {instanceID: 4098}
+      Script: {instanceID: 4100}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -625,11 +625,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2992}
     - Class: 114
-      Script: {instanceID: 3956}
+      Script: {instanceID: 3958}
     - Class: 114
-      Script: {instanceID: 4098}
+      Script: {instanceID: 4100}
     - Class: 114
-      Script: {instanceID: 4202}
+      Script: {instanceID: 4204}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1095,6 +1095,12 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: 27b60ae4770c28ab81eb702136ab45ce
+    assemblyName: Assembly-CSharp
+    namespaceName: PlayerScripts
+    className: PlayerController
+  - hash:
+      serializedVersion: 2
       Hash: b747f5d40674055dd70e18552f1b0447
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
@@ -1219,12 +1225,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.AI.Navigation
     namespaceName: Unity.AI.Navigation
     className: NavMeshLink
-  - hash:
-      serializedVersion: 2
-      Hash: 27b60ae4770c28ab81eb702136ab45ce
-    assemblyName: Assembly-CSharp
-    namespaceName: PlayerScripts
-    className: PlayerController
   platform: 20
   scenePathNames:
   - Assets/Scenes/StartingScene.unity
